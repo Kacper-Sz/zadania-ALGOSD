@@ -1,18 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "funkcje.h"
+
+
 int main()
 {
     int choice;
     
     while(1)
     {
-        printf("1. Dodawanie\n");
-        printf("2. Odejmowanie\n");
-        printf("3. Mnozenie\n");
-        printf("4. Dzielenie\n");
-        printf("5. Wyjscie\n");
         printf("Wybierz dzialanie: ");
+        printf("1 - dodaj element na poczatku listy\n");
+        printf("2 - dodaj element na koncu listy\n");
+        printf("3 - usun pierwszy element listy\n");
+        printf("4 - usun ostatni element listy\n");
+        printf("5 - odszukaj zadany element\n");
         scanf("%d", &choice);
         
         if(choice == 5)
@@ -20,35 +23,22 @@ int main()
             break;
         }
         
-        int a, b;
-        printf("Podaj a: ");
-        scanf("%d", &a);
-        printf("Podaj b: ");
-        scanf("%d", &b);
-        
         switch(choice)
         {
             case 1:
-                printf("Wynik: %d\n", a + b);
+                //funkcja dodawania na poczatku listy
                 break;
             case 2:
-                printf("Wynik: %d\n", a - b);
+                //funkcja dodawania na koncu listy
                 break;
             case 3:
-                printf("Wynik: %d\n", a * b);
+                //funkcja usuwania pierwszego elementu listy
                 break;
             case 4:
-                if(b == 0)
-                {
-                    printf("Nie mozna dzielic przez 0\n");
-                }
-                else
-                {
-                    printf("Wynik: %d\n", a / b);
-                }
+                //funkcja usuwania ostatniego elementu listy
                 break;
             default:
-                printf("Niepoprawny wybor\n");
+                printf("wybierz poprawne odpowiednia liczbe\n");
         }
     }
 
