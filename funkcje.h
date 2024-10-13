@@ -14,6 +14,7 @@ void UsunPierwszy(lista *l);
 void UsunOstatni(lista *l);
 void OdszukajElement(lista l, int element);
 void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore);
-void UsunWskazany(lista *l, int number);
+void UsunWskazany(lista *l, int number, int opcja);
 
 void WyswietlListeOdPoczatku(lista l);
+void WyswietlListeOdKonca(lista l);

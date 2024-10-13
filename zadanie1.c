@@ -5,7 +5,7 @@
 
 int main()
 {
-    int choice, number;
+    int choice, number, gdzie, opcja, ktore;
     
     lista _l = 0;
 
@@ -69,7 +69,6 @@ int main()
                 printf("podaj liczbe ktora chcesz dodac jako nowy element: ");
                 scanf("%d", &number);
                 printf("\npodaj liczbe przed lub za ktora chcesz dodac nowy element: ");
-                int gdzie, opcja, ktore;
                 scanf("%d", &gdzie);
                 printf("\n1 - dodaj przed\n");
                 printf("2 - dodaj za\n");
@@ -77,6 +76,7 @@ int main()
                 scanf("%d", &opcja);
                 printf("\n1 - dodaj tylko przed pierwszym napotkanym\n");
                 printf("2 - dodaj przed kazdym napotkanym\n");
+                scanf("%d", &ktore);
                 if (opcja == 1 || opcja == 2) {
                     DodajPrzedLubZa(&_l, number, gdzie, opcja, ktore);
                 } else {
@@ -87,13 +87,23 @@ int main()
             case 7:
                 printf("podaj liczbe ktora chcesz usunac: ");
                 scanf("%d", &number);
-                UsunWskazany(&_l, number);
+                printf("\n1 - usun tylko pierwszy napotkany\n");
+                printf("2 - usun kazdy napotkany\n");
+                scanf("%d", &opcja);
+                UsunWskazany(&_l, number, opcja);
                 printf("\n");
                 break;
 
 
             case 10:
-                WyswietlListeOdPoczatku(_l);
+                printf("\njak ma byc wyswietlana lista?");
+                printf("\n1 - od poczatku\n");
+                printf("2 - od konca\n");
+                printf("podaj wybor: ");
+                scanf("%d", &opcja);
+                if (opcja == 1) WyswietlListeOdPoczatku(_l);
+                if (opcja == 2) WyswietlListeOdKonca(_l);
+                printf("\n");
                 break;
             default:
                 printf("wybierz poprawne odpowiednia liczbe\n");

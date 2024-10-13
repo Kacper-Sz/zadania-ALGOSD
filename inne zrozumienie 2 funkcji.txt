@@ -1,3 +1,12 @@
+case 5:
+                //funkcja odszukujaca zadany element
+                printf("podaj liczbe ktora chcesz odszukac: ");
+                scanf("%d", &number);
+                printf("\n");
+                OdszukajElement(_l, number);
+                break;
+
+                
 void OdszukajElement(lista l, int element)
 {
     lista nowa = l;
