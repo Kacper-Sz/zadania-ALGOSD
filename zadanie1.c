@@ -65,6 +65,29 @@ int main()
                 printf("\n");
                 OdszukajElement(_l, number);
                 break;
+            case 6:
+                printf("podaj liczbe ktora chcesz dodac jako nowy element: ");
+                scanf("%d", &number);
+                printf("\npodaj liczbe przed lub za ktora chcesz dodac nowy element: ");
+                int gdzie, opcja;
+                scanf("%d", &gdzie);
+                printf("\n1 - dodaj przed\n");
+                printf("2 - dodaj za\n");
+                printf("Wybierz opcje: ");
+                scanf("%d", &opcja);
+                if (opcja == 1 || opcja == 2) {
+                    DodajPrzedLubZa(&_l, number, gdzie, opcja);
+                } else {
+                    printf("Niepoprawna opcja\n");
+                }
+                printf("\n");
+                break;
+            case 7:
+                printf("podaj liczbe ktora chcesz usunac: ");
+                scanf("%d", &number);
+                UsunWskazany(&_l, number);
+                printf("\n");
+                break;
 
 
             case 10:
