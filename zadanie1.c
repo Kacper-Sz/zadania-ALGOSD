@@ -69,14 +69,16 @@ int main()
                 printf("podaj liczbe ktora chcesz dodac jako nowy element: ");
                 scanf("%d", &number);
                 printf("\npodaj liczbe przed lub za ktora chcesz dodac nowy element: ");
-                int gdzie, opcja;
+                int gdzie, opcja, ktore;
                 scanf("%d", &gdzie);
                 printf("\n1 - dodaj przed\n");
                 printf("2 - dodaj za\n");
                 printf("Wybierz opcje: ");
                 scanf("%d", &opcja);
+                printf("\n1 - dodaj tylko przed pierwszym napotkanym\n");
+                printf("2 - dodaj przed kazdym napotkanym\n");
                 if (opcja == 1 || opcja == 2) {
-                    DodajPrzedLubZa(&_l, number, gdzie, opcja);
+                    DodajPrzedLubZa(&_l, number, gdzie, opcja, ktore);
                 } else {
                     printf("Niepoprawna opcja\n");
                 }
