@@ -24,6 +24,11 @@ void DodajNaKoniec(lista *l, int klucz)
 
 void UsunPierwszy(lista *l)
 {
+    if (*l == 0)
+    {
+        printf("\nlista jest pusta\n");
+        return;
+    }
     lista poczatek;
     if(*l != 0 )
     {
@@ -31,17 +36,23 @@ void UsunPierwszy(lista *l)
         *l = (*l)->nast;
         free(poczatek);
     }
+    printf("\nusunieto pierwszy element\n");
 }
 
 void UsunOstatni(lista *l)
 {
-    if(*l == 0) return;
+    if(*l == 0) 
+    {
+        printf("\nlista jest pusta\n");
+        return;
+    }
     while((*l)->nast)
     {
         l=&(*l)->nast;
     }
     free(*l);
     *l=0;
+    printf("\nusunieto ostatni element\n");
 }
 
 void OdszukajElement(lista l, int element)
@@ -53,34 +64,34 @@ void OdszukajElement(lista l, int element)
         if(nowa->klucz == element)
         {
             licznik++;
-            printf("znaleziono element o wartosci %d pod adresem: %p\n", element, nowa);
+            printf("\nznaleziono element o wartosci %d pod adresem: %p\n", element, nowa);
         }
         nowa = nowa->nast;
     }
-    printf("lacznie element: %d, znaleziono %d ", element, licznik);
+    printf("\nlacznie element: %d, znaleziono %d ", element, licznik);
     if(licznik == 1) printf("raz\n\n");
-    else if (licznik == 0) printf("razy, element nie znajduje sie na liscie\n\n");
+    else if (licznik == 0) printf("\nrazy, element nie znajduje sie na liscie\n\n");
     else printf("razy\n\n");
 }
-//OD TEGO MOMENTU MOZNA SIE ZASTANOAWIAC NAD POPRAWA
-// OD TEGO MOEMENTU DZIAL DO PIERWSZEGO SPOTKANEGO
+
 void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
 {
     lista poprzedni = 0;
     lista obecny = *l;
+
+    if(*l == 0)
+    {
+        printf("\nlista jest pusta, brak elementu %d na liscie\n", gdzie);
+        return;
+    }
+
+
     switch (ktore)
     {
     case 1:
     // DODAWANIE ELEMENTU TYLKO PRZED PIERWSZYM NAPOTKANYM
         lista nowa = (lista)malloc(sizeof(elListy));
         nowa->klucz = element;
-
-        if(*l == 0)
-        {
-            *l = nowa;
-            nowa->nast = 0;
-            return;
-        }
 
         while(obecny != 0 && obecny->klucz != gdzie)
         {
@@ -105,6 +116,7 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
             }
             else
             {
+                //kiedy element ma byc dodany przed pierwszym
                 //pokazuja w to samo miejsce
                 nowa->nast = *l;
                 //pokazuje ze nowa bedzei pierwszym elementem
@@ -116,6 +128,7 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
             nowa->nast = obecny->nast;
             obecny->nast = nowa;
         }
+        printf("\npomyslnie dodano element\n");
         break;
 
     case 2:
@@ -152,6 +165,8 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
         poprzedni = obecny;
         obecny = obecny->nast;
         }
+        if(obecny == 0) printf("na liscie brak elementu: %d", gdzie);
+        else printf("\npomyslnie dodano elementy\n");
         break;
     default:
         printf("bledna opcja");
@@ -164,7 +179,7 @@ void UsunWskazany(lista *l, int number, int opcja)
 {
     if (*l == 0)
     {
-        printf("lista pusta brak elementu: %d", number);
+        printf("\nlista pusta brak elementu: %d\n", number);
         return;
     }
 
@@ -209,7 +224,7 @@ void UsunWskazany(lista *l, int number, int opcja)
                 poprzedni->nast = obecny->nast;
                 free(obecny);
                 obecny = poprzedni->nast;
-                printf("Usunięto element: %d\n", number);
+                printf("usunieto element: %d\n", number);
             }
             else
             {
@@ -217,6 +232,7 @@ void UsunWskazany(lista *l, int number, int opcja)
                 obecny = obecny->nast;
             }
         }
+        if (obecny == NULL) printf("element %d nie znajduje sie na liscie.\n", number);
         break;
     default:
         break;
@@ -224,12 +240,14 @@ void UsunWskazany(lista *l, int number, int opcja)
  
 }
 
-
-//DODAC WYSWIETLANIE OD KONCA LISTY
-
 void WyswietlListeOdPoczatku(lista l)
 {
     lista nowa = l;
+    if(nowa == 0)
+    {
+        printf("\nlista jest pusta\n");
+        return;
+    }
     while (nowa)
     {
         printf("%d ", nowa->klucz);
@@ -241,7 +259,15 @@ void WyswietlListeOdPoczatku(lista l)
 void WyswietlListeOdKonca(lista l)
 {
     lista nowa = l;
+    
+    if (nowa == 0)
+    {
+        printf("\nlista jest pusta\n");
+        return;
+    }
+
     lista odwrotna = 0;
+
     while(nowa)
     {
         DodajNaPoczatek(&odwrotna, nowa->klucz);
