@@ -186,8 +186,6 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
         poprzedni = obecny;
         obecny = obecny->nast;
         }
-        if(obecny == 0) printf("na liscie brak elementu: %d", gdzie);
-        else printf("\npomyslnie dodano elementy\n");
         break;
     default:
         printf("bledna opcja");
@@ -214,9 +212,12 @@ void UsunWskazany(lista *l, int number, int opcja)
         *l = obecny->nast;
         free(obecny);
         obecny = *l;
-        printf("usunieto eleemnt: %d", number);
         //OPCJA 1 USUNIECIE TYLKO PIERWSZEGO SPOTKANEGO
-        if (opcja == 1) return;
+        if (opcja == 1) 
+        {
+            printf("usunieto element %d\n", number);
+            return;
+        }
     }
 
     switch (opcja)
@@ -249,7 +250,6 @@ void UsunWskazany(lista *l, int number, int opcja)
                 poprzedni->nast = obecny->nast;
                 free(obecny);
                 obecny = poprzedni->nast;
-                printf("usunieto element: %d\n", number);
             }
             else
             //przejscie do nastepnego elementu jesli element nie zostanie znaleziony
@@ -258,10 +258,9 @@ void UsunWskazany(lista *l, int number, int opcja)
                 obecny = obecny->nast;
             }
         }
-        //jesli element nie zostanie znaleziony w ogole na liscie
-        if (obecny == NULL) printf("element %d nie znajduje sie na liscie.\n", number);
         break;
     default:
+        printf("bledna opcja");
         break;
     }
  

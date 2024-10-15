@@ -121,9 +121,9 @@ int main()
                 printf("2 - od konca\n");
                 printf("podaj wybor: ");
                 scanf("%d", &opcja);
+                printf("\n");
                 if (opcja == 1) WyswietlListeOdPoczatku(_l);
                 if (opcja == 2) WyswietlListeOdKonca(_l);
-                printf("\n");
                 break;
             default:
                 printf("\n");
