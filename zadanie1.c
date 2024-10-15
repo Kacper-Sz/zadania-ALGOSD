@@ -100,6 +100,7 @@ int main()
                 printf("\n");
                 break;
             case 7:
+                //funkcja usuwajaca wskazany element
                 printf("\n");
                 printf("podaj liczbe ktora chcesz usunac: ");
                 scanf("%d", &number);
@@ -113,6 +114,7 @@ int main()
 
 
             case 10:
+                //wyswietlanie listy
                 printf("\n");
                 printf("jak ma byc wyswietlana lista?");
                 printf("\n1 - od poczatku\n");

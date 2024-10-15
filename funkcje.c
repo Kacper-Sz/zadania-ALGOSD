@@ -4,26 +4,32 @@
 
 void DodajNaPoczatek(lista *l, int klucz)
 {
+    //tworzenie nowego elementu listy
     lista nowa = (lista)malloc(sizeof(elListy));
     nowa->klucz = klucz;
     nowa->nast = *l;
+    //przypisanie nowego elementu jako pierwszego
     *l=nowa;
 }
 
 void DodajNaKoniec(lista *l, int klucz)
 {
+    //tworzenie nowego elementu listy
     lista nowa = (lista)malloc(sizeof(elListy));
     nowa->klucz = klucz;
     nowa->nast = 0;
+    //przejscie na koniec listy
     while(*l)
     {
         l=&(*l)->nast;
     }
+    //przypisanie nowego elementu jako ostatniego
     *l=nowa;
 }
 
 void UsunPierwszy(lista *l)
 {
+    //sprawdzenie czy lista jest pusta
     if (*l == 0)
     {
         printf("\nlista jest pusta\n");
@@ -33,7 +39,9 @@ void UsunPierwszy(lista *l)
     if(*l != 0 )
     {
         poczatek = *l;
+        //przypisanie drugiego elementu jako pierwszego
         *l = (*l)->nast;
+        //usuniecie pierwszego elementu
         free(poczatek);
     }
     printf("\nusunieto pierwszy element\n");
@@ -41,16 +49,20 @@ void UsunPierwszy(lista *l)
 
 void UsunOstatni(lista *l)
 {
+    //sprawdzenie czy lista jest pusta
     if(*l == 0) 
     {
         printf("\nlista jest pusta\n");
         return;
     }
+    //przejscie na koniec listy
     while((*l)->nast)
     {
         l=&(*l)->nast;
     }
+    //usuniecie ostatniego elementu
     free(*l);
+    //nowy koniec listy
     *l=0;
     printf("\nusunieto ostatni element\n");
 }
@@ -59,15 +71,19 @@ void OdszukajElement(lista l, int element)
 {
     lista nowa = l;
     int licznik = 0;
+    //przeszukanie calej listy
     while(nowa) 
     {
+        //jesli element zostanie znaleziony
         if(nowa->klucz == element)
         {
             licznik++;
             printf("\nznaleziono element o wartosci %d pod adresem: %p\n", element, nowa);
         }
+        //przejscie do nastepnego elementu
         nowa = nowa->nast;
     }
+    //wyswietlenie ilosci znalezionych elementow
     printf("\nlacznie element: %d, znaleziono %d ", element, licznik);
     if(licznik == 1) printf("raz\n\n");
     else if (licznik == 0) printf("\nrazy, element nie znajduje sie na liscie\n\n");
@@ -79,6 +95,7 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
     lista poprzedni = 0;
     lista obecny = *l;
 
+    //sprawdzenie czy lista jest pusta
     if(*l == 0)
     {
         printf("\nlista jest pusta, brak elementu %d na liscie\n", gdzie);
@@ -109,15 +126,16 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
         //2 dodaje za
         if(opcja == 1)
         {
+            //kiedy element ma byc dodany przed i istnieje element poprzedni
             if(poprzedni)
             {
+                //pokazuje ze nowy element jest przed obecnym i po poprzednim
                 poprzedni->nast = nowa;
                 nowa->nast = obecny;
             }
             else
             {
                 //kiedy element ma byc dodany przed pierwszym
-                //pokazuja w to samo miejsce
                 nowa->nast = *l;
                 //pokazuje ze nowa bedzei pierwszym elementem
                 *l=nowa;
@@ -125,6 +143,7 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
         }
         else if (opcja == 2)
         {
+            //kiedy element ma byc dodany za
             nowa->nast = obecny->nast;
             obecny->nast = nowa;
         }
@@ -135,6 +154,7 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
     // DODAWANIE ELEMENTU PRZED KAZDYM NAPOTKANYM
         while(obecny)
         {
+        //jesli element zostanie znaleziony
         if (obecny->klucz == gdzie)
         {
             lista nowa = (lista)malloc(sizeof(elListy));
@@ -144,6 +164,7 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
             //2 dodaje za
             if (opcja == 1)
             {
+                //kiedy element ma byc dodany przed i istnieje element poprzedni
                 if (poprzedni)
                 {
                     poprzedni->nast = nowa;
@@ -161,7 +182,7 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
                 obecny->nast = nowa;
             }
         }
-
+        //przejscie do nastepnego elementu
         poprzedni = obecny;
         obecny = obecny->nast;
         }
@@ -177,6 +198,7 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
 
 void UsunWskazany(lista *l, int number, int opcja)
 {
+    //sprawdzenie czy lista jest pusta
     if (*l == 0)
     {
         printf("\nlista pusta brak elementu: %d\n", number);
@@ -186,6 +208,7 @@ void UsunWskazany(lista *l, int number, int opcja)
     
     lista obecny = *l;
     lista poprzedni = 0;
+    //usuwanie pierwszego elementu jesli jest rowny number
     if (obecny && obecny->klucz == number)
     {
         *l = obecny->nast;
@@ -202,15 +225,16 @@ void UsunWskazany(lista *l, int number, int opcja)
     case 1:
         while(obecny != 0 && obecny->klucz != number)
         {
+            //przejscie do nastepnego elementu
             poprzedni = obecny;
             obecny = obecny->nast;
         }
-
-            if (obecny == NULL) {
-                printf("element %d nie znajduje sie na liscie.\n", number);
-                return;
-            }
-
+        //jesli element nie zostanie znaleziony
+        if (obecny == NULL) {
+            printf("element %d nie znajduje sie na liscie.\n", number);
+            return;
+        }
+        //jesli element zostanie znaleziony to usuwa go i przypisuje nastepny element
         poprzedni->nast=obecny->nast;
         free(obecny);
         printf("usunieto element %d\n", number);
@@ -218,20 +242,23 @@ void UsunWskazany(lista *l, int number, int opcja)
     //OPCJA 2 USUN KAZDY KOLEJNY
     case 2:
         while(obecny)
-        {
+        {   //jesli element zostanie znaleziony
              if (obecny->klucz == number)
             {
+                //jesli element zostanie znaleziony to usuwa go i przypisuje nastepny element
                 poprzedni->nast = obecny->nast;
                 free(obecny);
                 obecny = poprzedni->nast;
                 printf("usunieto element: %d\n", number);
             }
             else
+            //przejscie do nastepnego elementu jesli element nie zostanie znaleziony
             {
                 poprzedni = obecny;
                 obecny = obecny->nast;
             }
         }
+        //jesli element nie zostanie znaleziony w ogole na liscie
         if (obecny == NULL) printf("element %d nie znajduje sie na liscie.\n", number);
         break;
     default:
