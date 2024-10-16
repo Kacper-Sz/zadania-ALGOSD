@@ -186,6 +186,7 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
         poprzedni = obecny;
         obecny = obecny->nast;
         }
+        printf("\npomyslnie dodano elementy jesli na liscie wystepowal element:%d\n", gdzie);
         break;
     default:
         printf("bledna opcja");
@@ -258,6 +259,7 @@ void UsunWskazany(lista *l, int number, int opcja)
                 obecny = obecny->nast;
             }
         }
+        printf("usunieto elementy %d, jezeli znajdowaly sie na liscie\n", number);
         break;
     default:
         printf("bledna opcja");
