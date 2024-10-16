@@ -248,9 +248,16 @@ void UsunWskazany(lista *l, int number, int opcja)
              if (obecny->klucz == number)
             {
                 //jesli element zostanie znaleziony to usuwa go i przypisuje nastepny element
-                poprzedni->nast = obecny->nast;
+                lista nastepny = obecny->nast;
+                // usuwamy biezacy element
+                if (poprzedni) {
+                    poprzedni->nast = nastepny;
+                } else {
+                    // usuwamy pierwszy element listy
+                    *l = nastepny;
+                }
                 free(obecny);
-                obecny = poprzedni->nast;
+                obecny = nastepny;
             }
             else
             //przejscie do nastepnego elementu jesli element nie zostanie znaleziony
