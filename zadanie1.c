@@ -111,8 +111,6 @@ int main()
                 UsunWskazany(&_l, number, opcja);
                 printf("\n");
                 break;
-
-
             case 10:
                 //wyswietlanie listy
                 printf("\n");
