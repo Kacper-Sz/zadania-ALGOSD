@@ -88,8 +88,8 @@ int main()
                 printf("2 - dodaj za\n");
                 printf("Wybierz opcje: ");
                 scanf("%d", &opcja);
-                printf("\n1 - dodaj tylko przed pierwszym napotkanym\n");
-                printf("2 - dodaj przed kazdym napotkanym\n");
+                printf("\n1 - dodaj tylko przy pierwszym napotkanym\n");
+                printf("2 - dodaj przy kazdym napotkanym\n");
                 printf("wybierz opcje: ");
                 scanf("%d", &ktore);
                 if (opcja == 1 || opcja == 2) {

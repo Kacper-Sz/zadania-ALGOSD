@@ -116,6 +116,7 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
             obecny = obecny->nast;
         }
 
+        //kiedy lista bedzie pusta
         if(obecny == 0)
         {
             printf("na liscie brak elementu: %d", gdzie);
@@ -144,6 +145,7 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
         else if (opcja == 2)
         {
             //kiedy element ma byc dodany za
+            //dopisujemy go za obecnym
             nowa->nast = obecny->nast;
             obecny->nast = nowa;
         }
@@ -152,39 +154,53 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
 
     case 2:
     // DODAWANIE ELEMENTU PRZED KAZDYM NAPOTKANYM
+        //wykonujemy dopoki obecny nie jest zero(ma elementy)
         while(obecny)
         {
         //jesli element zostanie znaleziony
-        if (obecny->klucz == gdzie)
-        {
-            lista nowa = (lista)malloc(sizeof(elListy));
-            nowa->klucz = element;
+            if (obecny->klucz == gdzie)
+            {
+                //tworzymy nowy element
+                lista nowa = (lista)malloc(sizeof(elListy));
+                nowa->klucz = element;
 
-            //1 dodaje przed
-            //2 dodaje za
-            if (opcja == 1)
-            {
-                //kiedy element ma byc dodany przed i istnieje element poprzedni
-                if (poprzedni)
+                //1 dodaje przed
+                //2 dodaje za
+                if (opcja == 1)
                 {
-                    poprzedni->nast = nowa;
-                    nowa->nast = obecny;
+                    //kiedy element ma byc dodany przed i istnieje element poprzedni
+                    if (poprzedni)
+                    {
+                        //pokazuje ze nowy element jest przed obecnym i po poprzednim (pomiedzy)
+                        poprzedni->nast = nowa;
+                        nowa->nast = obecny;
+                    }
+                    else
+                    {
+                        //kiedy ma byc to pierwszy element
+                        nowa->nast = *l;
+                        *l = nowa;
+                    }
+                    //dodalismy nowy element wiec kolejnosc teraz jest taka:
+                    //poprzedni nowa obecny
+                    //wiec zeby zachowac spojnosc 
+                    //poprzednim elementem musi sie stac ten "nowa"             
+                    poprzedni = nowa;
                 }
-                else
+                else if(opcja == 2)
                 {
-                    nowa->nast = *l;
-                    *l = nowa;
+                    //kiedy dodajemy za
+                    //to wyglada to tak: poprzedni obecny nowa
+                    nowa->nast = obecny->nast;
+                    obecny->nast = nowa;
+                    //tu rowniez trzeba zaktualizowac polozenie
+                    poprzedni = obecny;
+                    obecny = nowa;
                 }
             }
-            else if(opcja == 2)
-            {
-                nowa->nast = obecny->nast;
-                obecny->nast = nowa;
-            }
-        }
-        //przejscie do nastepnego elementu
-        poprzedni = obecny;
-        obecny = obecny->nast;
+            //przejscie do kolejngeo elementu
+            poprzedni = obecny;           
+            obecny = obecny->nast;    
         }
         printf("\npomyslnie dodano elementy jesli na liscie wystepowal element:%d\n", gdzie);
         break;
