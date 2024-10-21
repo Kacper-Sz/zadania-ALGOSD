@@ -1,0 +1,19 @@
+void WyswietlListeOdKonca(lista l)
+{
+    lista nowa = l;
+    
+    if (nowa == 0)
+    {
+        printf("\nlista jest pusta\n");
+        return;
+    }
+
+    lista odwrotna = 0;
+
+    while(nowa)
+    {
+        DodajNaPoczatek(&odwrotna, nowa->klucz);
+        nowa = nowa->nast;
+    }
+    WyswietlListeOdPoczatku(odwrotna);
+}

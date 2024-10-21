@@ -155,6 +155,7 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
     case 2:
     // DODAWANIE ELEMENTU PRZED KAZDYM NAPOTKANYM
         //wykonujemy dopoki obecny nie jest zero(ma elementy)
+        int czyDodano = 0;
         while(obecny)
         {
         //jesli element zostanie znaleziony
@@ -197,12 +198,20 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
                     poprzedni = obecny;
                     obecny = nowa;
                 }
+                czyDodano = 1;
             }
             //przejscie do kolejngeo elementu
             poprzedni = obecny;           
             obecny = obecny->nast;    
         }
-        printf("\npomyslnie dodano elementy jesli na liscie wystepowal element:%d\n", gdzie);
+        if(czyDodano == 1)
+        {
+            printf("\npomyslnie dodano element\n");
+        }
+        else
+        {
+            printf("\nna liscie brak elementu: %d\n", gdzie);
+        }        
         break;
     default:
         printf("bledna opcja");
@@ -213,6 +222,7 @@ void DodajPrzedLubZa(lista *l, int element, int gdzie, int opcja, int ktore)
 
 void UsunWskazany(lista *l, int number, int opcja)
 {
+    int czyUsunieto = 0;
     //sprawdzenie czy lista jest pusta
     if (*l == 0)
     {
@@ -274,6 +284,7 @@ void UsunWskazany(lista *l, int number, int opcja)
                 }
                 free(obecny);
                 obecny = nastepny;
+                czyUsunieto = 1;
             }
             else
             //przejscie do nastepnego elementu jesli element nie zostanie znaleziony
@@ -282,7 +293,14 @@ void UsunWskazany(lista *l, int number, int opcja)
                 obecny = obecny->nast;
             }
         }
-        printf("usunieto elementy %d, jezeli znajdowaly sie na liscie\n", number);
+        if(czyUsunieto == 1)
+        {
+            printf("usunieto elementy %d\n", number);
+        }
+        else
+        {
+            printf("element %d nie znajduje sie na liscie.\n", number);
+        }
         break;
     default:
         printf("bledna opcja");
@@ -309,20 +327,16 @@ void WyswietlListeOdPoczatku(lista l)
 
 void WyswietlListeOdKonca(lista l)
 {
-    lista nowa = l;
-    
-    if (nowa == 0)
+    if(l != 0)
     {
-        printf("\nlista jest pusta\n");
-        return;
+        if(l->nast == 0)
+        {
+            printf("%d ", l->klucz);
+        }
+        else
+        {
+            WyswietlListeOdKonca(l->nast);
+            printf("%d ", l->klucz);
+        }
     }
-
-    lista odwrotna = 0;
-
-    while(nowa)
-    {
-        DodajNaPoczatek(&odwrotna, nowa->klucz);
-        nowa = nowa->nast;
-    }
-    WyswietlListeOdPoczatku(odwrotna);
 }
