@@ -358,7 +358,6 @@ void UsunWszystkieNierekurencyjnie(lista *l, int number)
         return;
     }
 
-    //przejscie po liscie
     while(obecny != 0)
     {
         //jesli element znaleziony
@@ -366,10 +365,9 @@ void UsunWszystkieNierekurencyjnie(lista *l, int number)
         {
             //jak znajdzie element to go usuwa i przypisuje kolejne
             lista nastepny = obecny->nast;
-            //jesli element jest pierwszym elementem
+
             if(poprzedni != 0)
             {
-                //przypisanie nastepnego elementu
                 poprzedni->nast = nastepny;
             }
             else

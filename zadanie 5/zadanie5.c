@@ -23,8 +23,8 @@ int main()
         printf("7 - usun wskazany element\n");
 
         printf("10 - wyswietl zawartosc listy\n");
-        printf("11 - usun wszystkie wystapienia wskazanej wartosci (nierekurencyjnie)\n");
-        printf("12 - usun wszystkie wystapienia wskazanej wartosci (rekurencyjnie)\n");
+        printf("11 - usun wszystkie wystąpienia wskazanej wartości (nierekurencyjnie)\n");
+        printf("12 - usun wszystkie wystąpienia wskazanej wartości (rekurencyjnie)\n");
         printf("0 - wyjdz\n\n");
 
         printf("twoj wybor: ");
