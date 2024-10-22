@@ -22,3 +22,6 @@ void UsunWszystkieRekurencyjnie(lista *l, int number);
 
 void WyswietlListeOdPoczatku(lista l);
 void WyswietlListeOdKonca(lista l);
+
+void OdwrocListeNierekurencyjnie(lista *l);
+void OdwrocListeRekurencyjnie(lista l);

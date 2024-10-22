@@ -23,8 +23,11 @@ int main()
         printf("7 - usun wskazany element\n");
 
         printf("10 - wyswietl zawartosc listy\n");
-        printf("11 - usun wszystkie wystąpienia wskazanej wartości (nierekurencyjnie)\n");
-        printf("12 - usun wszystkie wystąpienia wskazanej wartości (rekurencyjnie)\n");
+        printf("11 - usun wszystkie wystapienia wskazanej wartosci (nierekurencyjnie)\n");
+        printf("12 - usun wszystkie wystapienia wskazanej wartosci (rekurencyjnie)\n");
+
+        printf("13 - odwroc liste nierekurencyjnie\n");
+        printf("14 - odwroc liste rekurencyjnie\n");
         printf("0 - wyjdz\n\n");
 
         printf("twoj wybor: ");
@@ -139,6 +142,19 @@ int main()
                 printf("podaj liczbe ktora chcesz usunac: ");
                 scanf("%d", &number);
                 UsunWszystkieRekurencyjnie(&_l, number);
+                printf("\n");
+                break;
+
+            case 13:
+                // odwroc liste nierekurencyjnie
+                printf("\n");
+                OdwrocListeNierekurencyjnie(&_l);
+                printf("\n");
+                break;
+            case 14:
+                // odwroc liste rekurencyjnie
+                printf("\n");
+                OdwrocListeRekurencyjnie(_l);
                 printf("\n");
                 break;
             default:

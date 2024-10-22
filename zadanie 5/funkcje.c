@@ -419,3 +419,25 @@ void UsunWszystkieRekurencyjnie(lista *l, int number)
         UsunWszystkieRekurencyjnie(&(*l)->nast, number);
     }
 }
+
+
+void OdwrocListeNierekurencyjnie(lista *l)
+{
+    lista poprzedni = 0;
+    lista obecny = *l;
+    lista nastepny = 0;
+
+    while (obecny != NULL)
+    {
+        nastepny = obecny->nast;
+        obecny->nast = poprzedni;
+        poprzedni = obecny;
+        obecny = nastepny;
+    }
+    *l = poprzedni;    
+}
+
+void OdwrocListeRekurencyjnie(lista l)
+{
+    
+}
