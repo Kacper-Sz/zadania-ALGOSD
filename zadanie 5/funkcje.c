@@ -437,7 +437,15 @@ void OdwrocListeNierekurencyjnie(lista *l)
     *l = poprzedni;    
 }
 
-void OdwrocListeRekurencyjnie(lista l)
+lista OdwrocListeRekurencyjnie(lista l)
 {
-    
+    if(l == NULL) return NULL;
+    if(l->nast == NULL) return l;
+    else
+    {
+        lista T = OdwrocListeRekurencyjnie(l->nast);
+        l->nast->nast = l;
+        l->nast = NULL;
+        return T;
+    }
 }
