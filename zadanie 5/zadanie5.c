@@ -154,7 +154,8 @@ int main()
             case 14:
                 // odwroc liste rekurencyjnie
                 printf("\n");
-                OdwrocListeRekurencyjnie(_l);
+                //zwracamy liste czyli przypisujemy do zmiennej _l
+                _l = OdwrocListeRekurencyjnie(_l);
                 printf("\n");
                 break;
             default:

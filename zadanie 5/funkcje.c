@@ -341,12 +341,12 @@ void WyswietlListeOdKonca(lista l)
     }
 }
 
-
-
 //zadanie 2
 
 void UsunWszystkieNierekurencyjnie(lista *l, int number)
 {
+    //uzywajac obcego i poprzedniego elementu
+    /*
     lista obecny = *l;
     lista poprzedni = 0;
     int czyUsunieto = 0;
@@ -358,6 +358,7 @@ void UsunWszystkieNierekurencyjnie(lista *l, int number)
         return;
     }
 
+    //przejscie po liscie
     while(obecny != 0)
     {
         //jesli element znaleziony
@@ -365,19 +366,24 @@ void UsunWszystkieNierekurencyjnie(lista *l, int number)
         {
             //jak znajdzie element to go usuwa i przypisuje kolejne
             lista nastepny = obecny->nast;
-
+            //jesli element nie jest pierwszy
             if(poprzedni != 0)
             {
+                //przypisanie nastepnego elementu
                 poprzedni->nast = nastepny;
             }
             else
             {
+                //jesli element jest pierwszy
                 *l = nastepny;
             }
+            //usuniecie elementu
             free(obecny);
+            //przypisanie nastepnego elementu
             obecny = nastepny;
             czyUsunieto = 1;
         }
+        //kiedy element nie zostanie znaleziony
         else
         {
             poprzedni = obecny;
@@ -393,10 +399,49 @@ void UsunWszystkieNierekurencyjnie(lista *l, int number)
         {
             printf("element %d nie znajduje sie na liscie.\n", number);
         }
+*/
+    //uzywajac wskaznnika
+
+    //sprawdzenie czy lista jest pusta
+    if(*l == 0)
+    {
+        printf("\nlista jest pusta\n");
+        return;
+    }
+
+    //jesli pierwszy i nastepny element jest rowny number
+    //
+    while (*l != NULL && (*l)->klucz == number) {
+        lista nowa = *l;
+        *l = (*l)->nast;
+        free(nowa);
+    }
+
+    //przechodzimy po liscie
+    //dopoki element nie jest pusty i nastepny element nie jest pusty
+    lista aktualny = *l;
+    while (aktualny != NULL && aktualny->nast != NULL)
+    {
+        //jesli nastepny element jest rowny number
+        if (aktualny->nast->klucz == number)
+        {
+            //pokazujemy na element ktory chcemy usunac
+            lista nowa = aktualny->nast;
+            //przesuwamy wskaznik na kolejny
+            aktualny->nast = aktualny->nast->nast;
+            free(nowa);
+        }
+        else
+        //jesli nie to idziemy do nastepnego
+        {
+            aktualny = aktualny->nast;
+        }
+    }
 }
 
 void UsunWszystkieRekurencyjnie(lista *l, int number)
 {
+    //sprawdzenie czy lista jest pusta
     if(*l == 0)
     {
         return;
@@ -405,22 +450,25 @@ void UsunWszystkieRekurencyjnie(lista *l, int number)
     //kiedy znajdziemy element o poszukiwanej wartosci
     if((*l)->klucz == number)
     {
-
+        //to twozymy nowa liste ktora jest rowna naszej glownej
         lista nowa = *l;
         //przesuwamy wskaznik na kolejny
         *l = (*l)->nast;
         //usuwamy biezacy element
         free(nowa);
-        UsunWszystkieRekurencyjnie(l, number);
+        //l jest juz adresem
+        UsunWszystkieNierekurencyjnie(l, number);
     }
     else
     {
         //jak nie pasuje to ide do nastepnego
+        //przekazuje adres nastepnego elementu
         UsunWszystkieRekurencyjnie(&(*l)->nast, number);
     }
 }
 
 
+//zadanie 5
 void OdwrocListeNierekurencyjnie(lista *l)
 {
     lista poprzedni = 0;

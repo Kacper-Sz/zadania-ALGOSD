@@ -1,0 +1,60 @@
+Oczywiście, oto szczegółowy opis działania funkcji OdwrocListeRekurencyjnie krok po kroku:
+
+Funkcja OdwrocListeRekurencyjnie
+Krok po kroku:
+Warunek bazowy 1: Jeśli lista jest pusta (l == NULL), zwracamy NULL.
+Warunek bazowy 2: Jeśli lista ma tylko jeden element (l->nast == NULL), zwracamy ten element, ponieważ jest to nowa głowa odwróconej listy.
+Rekurencja: Jeśli lista ma więcej niż jeden element, wywołujemy rekurencyjnie funkcję OdwrocListeRekurencyjnie na następnym elemencie (l->nast).
+Przykład działania:
+Załóżmy, że mamy listę: 1 -> 2 -> 3 -> 4 -> 5.
+
+Pierwsze wywołanie:
+l wskazuje na 1.
+Wywołujemy OdwrocListeRekurencyjnie(l->nast), czyli OdwrocListeRekurencyjnie(2).
+Drugie wywołanie:
+l wskazuje na 2.
+Wywołujemy OdwrocListeRekurencyjnie(l->nast), czyli OdwrocListeRekurencyjnie(3).
+Trzecie wywołanie:
+l wskazuje na 3.
+Wywołujemy OdwrocListeRekurencyjnie(l->nast), czyli OdwrocListeRekurencyjnie(4).
+Czwarte wywołanie:
+l wskazuje na 4.
+Wywołujemy OdwrocListeRekurencyjnie(l->nast), czyli OdwrocListeRekurencyjnie(5).
+Piąte wywołanie:
+l wskazuje na 5.
+l->nast jest NULL, więc zwracamy l, czyli 5.
+Powrót z rekurencji:
+Powrót do czwartego wywołania:
+T wskazuje na 5.
+l wskazuje na 4.
+Ustawiamy l->nast->nast = l, czyli 5->nast = 4.
+Ustawiamy l->nast = NULL, czyli 4->nast = NULL.
+Zwracamy T, czyli 5.
+Teraz lista wygląda tak: 5 -> 4.
+
+Powrót do trzeciego wywołania:
+T wskazuje na 5.
+l wskazuje na 3.
+Ustawiamy l->nast->nast = l, czyli 4->nast = 3.
+Ustawiamy l->nast = NULL, czyli 3->nast = NULL.
+Zwracamy T, czyli 5.
+Teraz lista wygląda tak: 5 -> 4 -> 3.
+
+Powrót do drugiego wywołania:
+T wskazuje na 5.
+l wskazuje na 2.
+Ustawiamy l->nast->nast = l, czyli 3->nast = 2.
+Ustawiamy l->nast = NULL, czyli 2->nast = NULL.
+Zwracamy T, czyli 5.
+Teraz lista wygląda tak: 5 -> 4 -> 3 -> 2.
+
+Powrót do pierwszego wywołania:
+T wskazuje na 5.
+l wskazuje na 1.
+Ustawiamy l->nast->nast = l, czyli 2->nast = 1.
+Ustawiamy l->nast = NULL, czyli 1->nast = NULL.
+Zwracamy T, czyli 5.
+Teraz lista wygląda tak: 5 -> 4 -> 3 -> 2 -> 1.
+
+Podsumowanie:
+Funkcja OdwrocListeRekurencyjnie odwraca listę rekurencyjnie, przechodząc do końca listy, a następnie odwracając wskaźniki podczas powrotu z rekurencji.
