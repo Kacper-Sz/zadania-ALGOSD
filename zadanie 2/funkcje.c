@@ -412,7 +412,6 @@ void UsunWszystkieNierekurencyjnie(lista *l, int number)
     }
 
     //jesli pierwszy i nastepny element jest rowny number
-    //
     while (*l != NULL && (*l)->klucz == number) {
         lista nowa = *l;
         *l = (*l)->nast;
