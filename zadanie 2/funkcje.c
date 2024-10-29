@@ -44,7 +44,7 @@ void UsunPierwszy(lista *l)
         //usuniecie pierwszego elementu
         free(poczatek);
     }
-    printf("\nusunieto pierwszy element\n");
+    //printf("\nusunieto pierwszy element\n");
 }
 
 void UsunOstatni(lista *l)
@@ -401,7 +401,7 @@ void UsunWszystkieNierekurencyjnie(lista *l, int number)
         {
             printf("element %d nie znajduje sie na liscie.\n", number);
         }
-*/
+
     //uzywajac wskaznnika
 
     //sprawdzenie czy lista jest pusta
@@ -438,6 +438,26 @@ void UsunWszystkieNierekurencyjnie(lista *l, int number)
             aktualny = aktualny->nast;
         }
     }
+    */
+
+   // TAK JAK MA BYC POPRAWNIE
+
+   if(*l == NULL) return;
+
+   while(*l != NULL)
+   {
+    if((*l)->klucz == number)
+    {
+        lista nowa = *l;
+        *l = (*l)->nast;
+        free(nowa);
+    }
+    else
+    {
+        l=&((*l)->nast);
+    }
+   }
+
 }
 
 void UsunWszystkieRekurencyjnie(lista *l, int number)
