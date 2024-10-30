@@ -24,5 +24,5 @@ void UsunWszystkieNierekurencyjnie(lista *l, int number);
 void UsunWszystkieRekurencyjnie(lista *l, int number);
 
 //zadanie 3
-int NajczestszyElement(lista l);
+void NajczestszyElement(lista l);
 

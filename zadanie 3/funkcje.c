@@ -490,41 +490,71 @@ void UsunWszystkieRekurencyjnie(lista *l, int number)
 
 
 //zadanie 3 
-int NajczestszyElement(lista l)
+void NajczestszyElement(lista l)
 {
-    lista nowa = l;
-
-    if(nowa == 0)
+    //sprawdzenie czy lista jest pusta
+    if(l == 0)
     {
         printf("\nlista jest pusta\n");
-        return 86878;
+        return;
     }
 
-    int obecny, najwiekszy, licznik, licznikNAJ;
-    obecny = 0;
-    najwiekszy = 0;
-    licznik = 0;
-    licznikNAJ = 0;
+    //zmienne pomocnicze
+    int obecny, najwiekszy, licznikOBECNY, licznikNAJ;
 
-    while(nowa != NULL)
+    //przypisanie pierwszego elementu jako najwiekszy
+    najwiekszy = l->klucz;
+    licznikNAJ = 1;
+    //licznik powtorzen elementu czy jest wiecej niz jeden element o takiej samej ilosci powtorzen
+    int licznikPowtorzen = 0;
+    //wskaznik na sprawdzany element
+    lista sprawdzany;
+    //przejscie po liscie
+    while(l != NULL)
     {
-        lista sprawdzany = nowa->nast;
-        obecny = nowa->klucz;
-        while(sprawdzany->nast != NULL)
+        //przypisanie obecnego elementu 
+        obecny = l->klucz;
+        //przypisanie licznika obecnego elementu
+        licznikOBECNY = 1;
+
+        //nasz sprawdzany element to nastepny element
+        sprawdzany = l ->nast;
+        while(sprawdzany != NULL)
         {
-            if(sprawdzany->klucz == nowa->klucz)
+            //jesli element jest rowny obecnemu to zwiekszamy licznik
+            if(sprawdzany->klucz == obecny)
             {
-                licznik++;
+                licznikOBECNY++;
             }
+            //przechodzimy do nastepnego elementu
             sprawdzany = sprawdzany->nast;
         }
-        if(licznik>licznikNAJ)
-        {
-            licznikNAJ = licznik;
-            najwiekszy = obecny;
-        }
-        nowa = nowa->nast;
-    }
 
-    return najwiekszy;
+        //jesli licznik obecnego elementu jest wiekszy od najwiekszego
+        if(licznikOBECNY>licznikNAJ)
+        {
+            //to najliczniejszy element to obecny
+            licznikNAJ = licznikOBECNY;
+            najwiekszy = obecny;
+            licznikPowtorzen = 1;
+        }
+        //jesli licznik obecnego elementu jest rowny najwiekszemu
+        //czyli wystepuje wiecej niz jeden element o takiej samej ilosci powtorzen
+        else if(licznikOBECNY == licznikNAJ)
+        {
+            licznikPowtorzen++;
+        }
+        //przechodzimy do nastepnego elementu wzgledem ktorego sprawdzamy
+        l = l->nast;
+    }
+    
+    //jesli wystepuje wiecej niz jeden element o takiej samej ilosci powtorzen
+    if(licznikPowtorzen > 1)
+    {
+        printf("\n\nwiecej niz jeden element o takiej samej ilosci powtorzen\n");
+        return;
+    }
+    //wyswietlenie najczesciej wystepujacego elementu
+    printf("najczestszy element: %d\n", najwiekszy);
+    return;
 }

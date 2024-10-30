@@ -147,7 +147,7 @@ int main()
             case 13:
                 //najczestszy element
                 printf("\n");
-                printf("najczestszy element: %d\n", NajczestszyElement(_l));
+                NajczestszyElement(_l);
                 printf("\n");
                 break;
             default:
