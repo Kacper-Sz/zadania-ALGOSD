@@ -153,9 +153,11 @@ int main()
                 printf("\n");
                 break;
             case 14:
-                //usun niepodzialne
+                //usun niepodzialne przez number
                 printf("\n");
-                UsunNiepodzielne(_l);
+                printf("podaj liczbe: ");
+                scanf("%d", &number);
+                _l = UsunNiepodzielne(_l, number);
                 printf("\n");
                 break;
             default:

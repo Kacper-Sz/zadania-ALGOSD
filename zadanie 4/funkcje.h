@@ -26,3 +26,6 @@ void UsunWszystkieRekurencyjnie(lista *l, int number);
 //zadanie 3
 void NajczestszyElement(lista l);
 
+//zadanie 4
+lista UsunNiepodzielne(lista l, int number);
+
