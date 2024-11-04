@@ -562,53 +562,32 @@ void NajczestszyElement(lista l)
 
 //zadanie 4
 
-lista UsunNiepodzielne(lista l, int number)
+void UsunNiepodzielne(lista *l, int number)
 {
-    //sprawdzenie czy lista jest pusta
-    if(l == 0)
+    //kiedy lista jest pusta
+    if(*l == 0)
     {
         printf("\nlista jest pusta\n");
-        return l;
+        return;
     }
 
-    //head to co zwroce
-    lista head = l;
-    //poprzedni element
-    lista poprzedni = 0;
-
-    //przejscie po liscie dopoki nie bedzie pusta
-    while (l != NULL)
+    //przechodze po liscie
+    while(*l != NULL)
     {
-        //jesli trafie na element ktory nie jest podzielny przez number
-        if(l->klucz % number != 0)
+        //kiedy element nie jest podzielny przez number
+        if((*l)->klucz % number != 0)
         {
-            //jesli element jest pierwszy
-            if(poprzedni == 0)
-            {
-                //przypisanie nastepnego elementu jako pierwszy
-                head = l->nast;
-                free(l);
-                l = head;
-            }
-            //jesli element nie jest pierwszy
-            else
-            {
-                //przypisanie nastepnego elementu jako nastepny
-                poprzedni->nast = l->nast;
-                free(l);
-                l = poprzedni->nast;
-            }
+            //usuwam element
+            lista nowa = *l;
+            *l = (*l)->nast;
+            free(nowa);
         }
-        //jesli element jest podzielny przez number
         else
         {
-            poprzedni = l;
-            l = l->nast; 
+            //przechodze do nastepnego elementu
+            l=&((*l)->nast);
         }
     }
-
-    return head;
-
 }
 
 

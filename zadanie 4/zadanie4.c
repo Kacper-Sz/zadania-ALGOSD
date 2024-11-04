@@ -157,7 +157,7 @@ int main()
                 printf("\n");
                 printf("podaj liczbe: ");
                 scanf("%d", &number);
-                _l = UsunNiepodzielne(_l, number);
+                UsunNiepodzielne(&_l, number);
                 printf("\n");
                 break;
             default:

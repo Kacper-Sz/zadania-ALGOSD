@@ -516,7 +516,6 @@ void NajczestszyElement(lista l)
         obecny = l->klucz;
         //przypisanie licznika obecnego elementu
         licznikOBECNY = 1;
-
         //nasz sprawdzany element to nastepny element
         sprawdzany = l ->nast;
         while(sprawdzany != NULL)
