@@ -2,6 +2,17 @@
 #include <stdlib.h>
 #include "funkcje.h"
 
+
+// dodanie wartownika
+void DodanieWartownika(lista *l)
+{
+    lista wartownik = malloc(sizeof(elListy));
+    wartownik->klucz = INT_MAX;
+    wartownik->nast = *l;
+    *l = wartownik;
+}
+
+
 //dodawanie na poczatek dla listy uporzadkowanej
 void DodajDoPosortowanej(lista *l, int klucz)
 {
@@ -25,6 +36,22 @@ void DodajDoPosortowanej(lista *l, int klucz)
 }
 
 
+void DodajDoPosortowanejWartownik(lista *l, int klucz)
+{
+    lista nowa = malloc(sizeof(elListy));
+    nowa->klucz = klucz;
+
+    while((*l)->klucz < klucz)
+    {
+        l = &((*l)->nast);
+    }
+
+    nowa->nast = *l;
+    *l = nowa;
+}
+
+
+
 lista* ZnajdzPosortowana(lista *l, int klucz)
 {
     while((*l) != NULL && (*l)->klucz < klucz)
@@ -41,6 +68,22 @@ lista* ZnajdzPosortowana(lista *l, int klucz)
     }
 }
 
+lista* ZnajdzPosortowanaWartownik(lista *l, int klucz)
+{
+    while((*l)->klucz < klucz)
+    {
+        l = &((*l)->nast);
+    }
+    if((*l)->klucz == klucz)
+    {
+        return l;
+    }
+    else
+    {
+        return NULL;
+    }
+}
+
 void UsunWskazanyPosortowana(lista *l, int number)
 {
     while((*l) != NULL && (*l)->klucz < number)
@@ -49,6 +92,26 @@ void UsunWskazanyPosortowana(lista *l, int number)
     }
 
     if((*l) != NULL && (*l)->klucz == number)
+    {
+        lista nowa = *l;
+        *l = (*l)->nast;
+        free(nowa);
+    }
+    else
+    {
+        printf("element %d nie znajduje sie na liscie.\n", number);
+    }
+}
+
+void UsunWskazanyPosortowanaWartownik(lista *l, int number)
+{
+    while((*l)->klucz < number)
+    {
+        //przejscie do nastepnego adresu
+        l = &((*l)->nast);
+    }
+
+    if((*l)->klucz == number)
     {
         lista nowa = *l;
         *l = (*l)->nast;
@@ -380,6 +443,11 @@ void WyswietlListeOdPoczatku(lista l)
     }
     while (nowa)
     {
+        if(nowa->klucz == INT_MAX)
+        {
+            nowa = nowa->nast;
+            continue;
+        }
         printf("%d ", nowa->klucz);
         nowa = nowa->nast;
     }

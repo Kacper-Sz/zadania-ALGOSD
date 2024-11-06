@@ -8,9 +8,16 @@ struct el {
 typedef struct el elListy;
 typedef elListy *lista;
 
+void DodanieWartownika(lista *l);
+
 void DodajDoPosortowanej(lista *l, int klucz);
+void DodajDoPosortowanejWartownik(lista *l, int klucz);
+
 lista * ZnajdzPosortowana(lista *l, int klucz);
+lista * ZnajdzPosortowanaWartownik(lista *l, int klucz);
+
 void UsunWskazanyPosortowana(lista *l, int number);
+void UsunWskazanyPosortowanaWartownik(lista *l, int number);
 
 
 

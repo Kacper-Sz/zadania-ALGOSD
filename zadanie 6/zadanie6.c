@@ -27,11 +27,17 @@ int main()
         printf("12 - usun wszystkie wystapienia wskazanej wartosci (rekurencyjnie)\n");
 
         printf("13 - odwroc liste nierekurencyjnie\n");
-        printf("14 - odwroc liste rekurencyjnie\n");
+
+
+
+        printf("14 - dodaj wartownik\n");
 
         printf("15 - dodaj element lista uporzadkowana\n");
-        printf("16 - znajdz element w liscie uporzadkowanej\n");
-        printf("17 - usun wskazany element z listy uporzadkowanej\n");
+        printf("16 - dodaj element lista uporzadkowana z wartownikiem\n");
+        printf("17 - znajdz element w liscie uporzadkowanej\n");
+        printf("18 - znajdz element w liscie uporzadkowanej z wartownikem\n");
+        printf("19 - usun wskazany element z listy uporzadkowanej\n");
+        printf("20 - usun wskazany element z listy uporzadkowanej z wartownikiem\n");
         printf("0 - wyjdz\n\n");
 
         printf("twoj wybor: ");
@@ -156,10 +162,9 @@ int main()
                 printf("\n");
                 break;
             case 14:
-                // odwroc liste rekurencyjnie
+                // dodaj wartownik
                 printf("\n");
-                //zwracamy liste czyli przypisujemy do zmiennej _l
-                _l = OdwrocListeRekurencyjnie(_l);
+                DodanieWartownika(&_l);
                 printf("\n");
                 break;
             case 15:
@@ -171,6 +176,14 @@ int main()
                 printf("\n");
                 break;
             case 16:
+                // dodaj element lista uporzadkowana z wartownikiem
+                printf("\n");
+                printf("podaj liczbe ktora chcesz dodac: ");
+                scanf("%d", &number);
+                DodajDoPosortowanejWartownik(&_l, number);
+                printf("\n");
+                break;
+            case 17:
                 // znajdz element w liscie uporzadkowanej
                 printf("\n");
                 printf("podaj liczbe ktora chcesz znalezc: ");
@@ -183,12 +196,33 @@ int main()
                 }
                 printf("\n");
                 break;
-            case 17:
+            case 18:
+                // znajdz element w liscie uporzadkowanej z wartownikiem
+                printf("\n");
+                printf("podaj liczbe ktora chcesz znalezc: ");
+                scanf("%d", &number);
+                lista *znalezionyWartownik = ZnajdzPosortowanaWartownik(&_l, number);
+                if (znalezionyWartownik) {
+                    printf("Znaleziono element %d\n", (*znalezionyWartownik)->klucz);
+                } else {
+                    printf("Nie znaleziono elementu %d\n", number);
+                }
+                printf("\n");
+                break;
+            case 19:
                 // usun wskazany element z listy uporzadkowanej
                 printf("\n");
                 printf("podaj liczbe ktora chcesz usunac: ");
                 scanf("%d", &number);
                 UsunWskazanyPosortowana(&_l, number);
+                printf("\n");
+                break;
+            case 20:
+                // usun wskazany element z listy uporzadkowanej z wartownikiem
+                printf("\n");
+                printf("podaj liczbe ktora chcesz usunac: ");
+                scanf("%d", &number);
+                UsunWskazanyPosortowanaWartownik(&_l, number);
                 printf("\n");
                 break;
             default:
