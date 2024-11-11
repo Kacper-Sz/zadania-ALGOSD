@@ -124,9 +124,9 @@ int main()
             case 9:
                 // pobierz pierwszy element z z listy uporzadkowanej
                 printf("\n");
-                lista pierwszy = ZnajdzPierwszy(&_l);
+                lista* pierwszy = ZnajdzPierwszy(&_l);
                 if (pierwszy) {
-                    printf("Pierwszy element to %d\n", (pierwszy)->klucz);
+                    printf("Pierwszy element to %d\n", (*pierwszy)->klucz);
                 } else {
                     printf("Lista jest pusta\n");
                 }
@@ -135,9 +135,9 @@ int main()
             case 10:
                 // pobierz pierwszy element z z listy uporzadkowanej z wartownikiem
                 printf("\n");
-                lista pierwszyWartownik = ZnajdzPierwszyWartownik(&_l);
+                lista* pierwszyWartownik = ZnajdzPierwszyWartownik(&_l);
                 if (pierwszyWartownik) {
-                    printf("Pierwszy element to %d\n", pierwszyWartownik->klucz);
+                    printf("Pierwszy element to %d\n", (*pierwszyWartownik)->klucz);
                 } else {
                     printf("Lista jest pusta\n");
                 }
@@ -146,9 +146,9 @@ int main()
             case 11:
                 // pobierz ostatni element z z listy uporzadkowanej
                 printf("\n");
-                lista ostatni = ZnajdzOstatni(&_l);
+                lista* ostatni = ZnajdzOstatni(&_l);
                 if (ostatni) {
-                    printf("Ostatni element to %d\n", ostatni->klucz);
+                    printf("Ostatni element to %d\n", (*ostatni)->klucz);
                 } else {
                     printf("Lista jest pusta\n");
                 }
@@ -157,9 +157,9 @@ int main()
             case 12:
                 // pobierz ostatni element z z listy uporzadkowanej z wartownikiem
                 printf("\n");
-                lista ostatniWartownik = ZnajdzOstatniWartownik(&_l);
+                lista* ostatniWartownik = ZnajdzOstatniWartownik(&_l);
                 if (ostatniWartownik) {
-                    printf("Ostatni element to %d\n", ostatniWartownik->klucz);
+                    printf("Ostatni element to %d\n", (*ostatniWartownik)->klucz);
                 } else {
                     printf("Lista jest pusta\n");
                 }

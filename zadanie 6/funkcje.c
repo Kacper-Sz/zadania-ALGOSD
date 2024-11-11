@@ -125,38 +125,38 @@ void UsunWskazanyPosortowanaWartownik(lista *l, int number)
 
 //zobaczyc jeszcze z cwiczen jak pisalismy te funkcje
 
-lista ZnajdzPierwszy(lista *l)
+lista* ZnajdzPierwszy(lista *l)
 {
-   if (*l == NULL) {
+   if (l == NULL) {
         //printf("Lista jest pusta.\n");
         return NULL;
     }
-    return *l;
+    return l;
 }
 
-lista ZnajdzPierwszyWartownik(lista *l)
+lista* ZnajdzPierwszyWartownik(lista *l)
 {
     //zakladam ze jedyny element to wartownik
     if ((*l)->nast == NULL) {
         //printf("Lista jest pusta.\n");
         return NULL;
     }
-    return *l;
+    return l;
 }
 
-lista ZnajdzOstatni(lista *l)
+lista* ZnajdzOstatni(lista *l)
 {
-    if (*l == NULL) {
+    if (l == NULL) {
         //printf("Lista jest pusta.\n");
         return NULL;
     }
     while ((*l)->nast != NULL) {
         l = &((*l)->nast);
     }
-    return *l;
+    return l;
 }
 
-lista ZnajdzOstatniWartownik(lista *l)
+lista* ZnajdzOstatniWartownik(lista *l)
 {
     if ((*l)->nast == NULL) {
         //printf("Lista jest pusta.\n");
@@ -165,7 +165,7 @@ lista ZnajdzOstatniWartownik(lista *l)
     while ((*l)->nast->nast != NULL) {
         l = &((*l)->nast);
     }
-    return *l;
+    return l;
 }
 
 

@@ -23,12 +23,12 @@ void UsunWskazanyPosortowana(lista *l, int number);
 void UsunWskazanyPosortowanaWartownik(lista *l, int number);
 
 
-lista ZnajdzPierwszy(lista *l);
-lista ZnajdzPierwszyWartownik(lista *l);
+lista* ZnajdzPierwszy(lista *l);
+lista* ZnajdzPierwszyWartownik(lista *l);
 
 
-lista ZnajdzOstatni(lista *l);
-lista ZnajdzOstatniWartownik(lista *l);
+lista* ZnajdzOstatni(lista *l);
+lista* ZnajdzOstatniWartownik(lista *l);
 
 
 void WyswietlListeOdPoczatku(lista l);
