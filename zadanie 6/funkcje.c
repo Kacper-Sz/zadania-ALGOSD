@@ -6,19 +6,29 @@
 // dodanie wartownika
 void DodanieWartownika(lista *l)
 {
+    //alokacja pamieci dla wartownika
     lista wartownik = malloc(sizeof(elListy));
     wartownik->klucz = INT_MAX;
-    wartownik->nast = *l;
-    *l = wartownik;
+    //dodam na koniec wiec pole nast to 0
+    wartownik->nast = 0;
+    //dopoki nie znajdziemy ostatniego elementu
+    while(*l)
+    {
+        l=&(*l)->nast;
+    }
+    //przypisanie ostatniego elementu jako wartownika
+    *l=wartownik;
 }
 
 
 //dodawanie na poczatek dla listy uporzadkowanej
 void DodajDoPosortowanej(lista *l, int klucz)
 {
+    //alokacja pamieci dla nowego elementu
     lista nowa = malloc(sizeof(elListy));
     nowa->klucz = klucz;
 
+    //jesli lista jest pusta
     if(*l == 0)
     {
         nowa->nast = *l;
@@ -26,11 +36,14 @@ void DodajDoPosortowanej(lista *l, int klucz)
         return;
     }
 
+    //dopoki nie znajdziemy elementu wiekszego od tego co chcemu dodac
     while(*l != NULL && (*l)->klucz < klucz)
     {
+        //adres czesci nastepnej
         l = &((*l)->nast);
     }
 
+    //dodajemy element przed elementem wiekszym
     nowa->nast = *l;
     *l = nowa;
 }
@@ -38,14 +51,18 @@ void DodajDoPosortowanej(lista *l, int klucz)
 
 void DodajDoPosortowanejWartownik(lista *l, int klucz)
 {
+    //alokacja pamieci dla nowego elementu
     lista nowa = malloc(sizeof(elListy));
     nowa->klucz = klucz;
 
+    //dopoki nie znajdziemy elementu wiekszego od tego co chcemu dodac
+    //zawsze bedzei wiekszy bo jest wartownik
     while((*l)->klucz < klucz)
     {
         l = &((*l)->nast);
     }
 
+    //dodajemy element przed elementem wiekszym
     nowa->nast = *l;
     *l = nowa;
 }
@@ -54,10 +71,12 @@ void DodajDoPosortowanejWartownik(lista *l, int klucz)
 
 lista* ZnajdzPosortowana(lista *l, int klucz)
 {
+    //dopoki nie znajdziemy elementu wiekszego od tego co chcemu dodac
     while((*l) != NULL && (*l)->klucz < klucz)
     {
         l = &((*l)->nast);
     }
+    //jesli nie ma elementu lub jest wiekszy
     if((*l) == NULL || (*l)->klucz > klucz)
     {
         return NULL;
@@ -70,10 +89,12 @@ lista* ZnajdzPosortowana(lista *l, int klucz)
 
 lista* ZnajdzPosortowanaWartownik(lista *l, int klucz)
 {
+    //dopoki nie znajdziemy elementu wiekszego od tego co chcemu dodac
     while((*l)->klucz < klucz)
     {
         l = &((*l)->nast);
     }
+    //jesli element jest rowny
     if((*l)->klucz == klucz)
     {
         return l;
@@ -86,11 +107,12 @@ lista* ZnajdzPosortowanaWartownik(lista *l, int klucz)
 
 void UsunWskazanyPosortowana(lista *l, int number)
 {
+    //dopoki nie znajdziemy elementu wiekszego od tego co chcemu dodac
     while((*l) != NULL && (*l)->klucz < number)
     {
         l = &((*l)->nast);
     }
-
+    //jesli element jest rowny usuwamy
     if((*l) != NULL && (*l)->klucz == number)
     {
         lista nowa = *l;
@@ -105,12 +127,14 @@ void UsunWskazanyPosortowana(lista *l, int number)
 
 void UsunWskazanyPosortowanaWartownik(lista *l, int number)
 {
+    //dopoki nie znajdziemy elementu wiekszego od tego co chcemu dodac
     while((*l)->klucz < number)
     {
-        //przejscie do nastepnego adresu
+        //przejscie do nastepnej czesci adresu
         l = &((*l)->nast);
     }
 
+    //jesli element jest rowny usuwamy
     if((*l)->klucz == number)
     {
         lista nowa = *l;
@@ -127,44 +151,55 @@ void UsunWskazanyPosortowanaWartownik(lista *l, int number)
 
 lista* ZnajdzPierwszy(lista *l)
 {
+    //jesli lista jest pusta
    if (l == NULL) {
         //printf("Lista jest pusta.\n");
         return NULL;
     }
+    //zwraca pierwszy element
     return l;
 }
 
 lista* ZnajdzPierwszyWartownik(lista *l)
 {
     //zakladam ze jedyny element to wartownik
+    //czy nastepepny element jest nullem ten po wartowniku
     if ((*l)->nast == NULL) {
         //printf("Lista jest pusta.\n");
         return NULL;
     }
+    //zwraca pierwszy element
     return l;
 }
 
 lista* ZnajdzOstatni(lista *l)
 {
+    //jesli lista jest pusta
     if (l == NULL) {
         //printf("Lista jest pusta.\n");
         return NULL;
     }
+    //ide na koniec listy
     while ((*l)->nast != NULL) {
         l = &((*l)->nast);
     }
+    //zwracam ostatni element
     return l;
 }
 
 lista* ZnajdzOstatniWartownik(lista *l)
 {
+    //jesli lista jest pusta
     if ((*l)->nast == NULL) {
         //printf("Lista jest pusta.\n");
         return NULL;
     }
+    //ide na koniec listy
+    //sprawdzam czy element po wartowniku nie jest nullem
     while ((*l)->nast->nast != NULL) {
         l = &((*l)->nast);
     }
+    //zwracam ostatni element
     return l;
 }
 
@@ -173,7 +208,7 @@ lista* ZnajdzOstatniWartownik(lista *l)
 
 
 
-
+//wyswietlanie listy
 
 void WyswietlListeOdPoczatku(lista l)
 {
@@ -187,6 +222,7 @@ void WyswietlListeOdPoczatku(lista l)
     {
         if(nowa->klucz == INT_MAX)
         {
+            printf("Wartownik");
             nowa = nowa->nast;
             continue;
         }
@@ -194,20 +230,4 @@ void WyswietlListeOdPoczatku(lista l)
         nowa = nowa->nast;
     }
     printf("\n\n");    
-}
-
-void WyswietlListeOdKonca(lista l)
-{
-    if(l != 0)
-    {
-        if(l->nast == 0)
-        {
-            printf("%d ", l->klucz);
-        }
-        else
-        {
-            WyswietlListeOdKonca(l->nast);
-            printf("%d ", l->klucz);
-        }
-    }
 }

@@ -5,7 +5,7 @@
 
 int main()
 {
-    int choice, number, opcja;
+    int choice, number;
     
     lista _l = 0;
 
@@ -48,14 +48,7 @@ int main()
             case 1:
                 //wyswietlanie listy
                 printf("\n");
-                printf("jak ma byc wyswietlana lista?");
-                printf("\n1 - od poczatku\n");
-                printf("2 - od konca\n");
-                printf("podaj wybor: ");
-                scanf("%d", &opcja);
-                printf("\n");
-                if (opcja == 1) WyswietlListeOdPoczatku(_l);
-                if (opcja == 2) WyswietlListeOdKonca(_l);
+                WyswietlListeOdPoczatku(_l);
                 break;
             case 2:
                 // dodaj wartownik

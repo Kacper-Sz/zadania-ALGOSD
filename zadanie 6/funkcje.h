@@ -32,4 +32,3 @@ lista* ZnajdzOstatniWartownik(lista *l);
 
 
 void WyswietlListeOdPoczatku(lista l);
-void WyswietlListeOdKonca(lista l);
