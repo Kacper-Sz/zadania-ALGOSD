@@ -8,6 +8,7 @@ int main()
     int choice, number;
     
     lista _l = 0;
+    lista _q = 0;
 
     while(1)
     {
