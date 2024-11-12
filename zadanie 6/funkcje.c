@@ -77,8 +77,8 @@ lista* ZnajdzPosortowana(lista *l, int klucz)
     {
         l = &((*l)->nast);
     }
-    //jesli nie ma elementu lub jest wiekszy
-    if((*l) == NULL || (*l)->klucz > klucz)
+    //jesli nie ma elementu lub jest nie rowny
+    if((*l) == NULL || (*l)->klucz != klucz)
     {
         return NULL;
     }
