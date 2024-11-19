@@ -114,8 +114,14 @@ void DodajZa(lista *l, int element, int gdzie)
     {
         if((*l)->klucz == gdzie)
         {
-            
+            lista nowa = malloc(sizeof(elListy));
+            nowa->klucz = element;
+            nowa->nast = (*l)->nast;
+            nowa->poprz = *l;
+            (*l)->nast = nowa;
+            return;
         }
+        l = &((*l)->nast);
     }
 }
 
