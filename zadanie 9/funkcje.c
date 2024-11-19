@@ -53,43 +53,69 @@ void UsunPierwszy(lista *l)
     free(nowy);
 }
 
+void UsunOstatni(lista *l)
+{
+    if(*l == NULL)
+    {
+        return;
+    }
+
+    while((*l)->nast != NULL)
+    {
+        l = &((*l)->nast);
+    }
+    UsunPierwszy(l);
+}
+
 lista* OdszukajElement(lista *l, int element)
 {
-   while(*l != NULL)
-   {
-       if((*l)->klucz == element)
-       {
-           return l;
-       }
-       l = &((*l)->nast);
-   }
-
-   return NULL;
+    while(*l != NULL)
+    {
+        if((*l)->klucz == element)
+        {
+            return l;
+        }
+        l = &((*l)->nast);
+    }
+    return NULL;
 }
 
 
 void DodajPrzed(lista *l, int element, int gdzie)
 {
-    l = OdszukajElement(l, gdzie);
-    if(*l != NULL)
+    if(*l == NULL)
     {
-        lista *q = &((*l)->poprz);
-        DodajNaPoczatek(q, element);
-        (*q)->nast = *l;
-        (*l)->poprz = *q;
+        return;
+    }
+
+    while(*l != NULL)
+    {
+        if((*l)->klucz == gdzie)
+        {
+            lista nowa = malloc(sizeof(elListy));
+            nowa->klucz = element;
+            nowa->nast = *l;
+            nowa->poprz = (*l)->poprz;
+            *l = nowa;
+            return;
+        }
+        l = &((*l)->nast);
     }
 }
 
 void DodajZa(lista *l, int element, int gdzie)
 {
-    lista *q;
-    l = OdszukajElement(l, gdzie);
-    if(*l != NULL)
+    if(*l==NULL)
     {
-        q = &((*l)->nast);
-        DodajNaPoczatek(q, element);
-        (*q)->poprz = *l;
-        (*l)->nast = *q;
+        return;
+    }
+
+    while(*l != NULL)
+    {
+        if((*l)->klucz == gdzie)
+        {
+            
+        }
     }
 }
 

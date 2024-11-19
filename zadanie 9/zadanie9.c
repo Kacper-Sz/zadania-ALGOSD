@@ -19,8 +19,9 @@ int main()
         printf("3 - usun pierwszy element listy\n");
         printf("4 - usun ostatni element listy\n");
         printf("5 - odszukaj zadany element\n");
-        printf("6 - dodaj element przed lub za wskazanym\n");
-        printf("7 - usun wskazany element\n");
+        printf("6 - dodaj element przed\n");
+        printf("7 - dodaj element za\n");
+        printf("8 - usun wskazany element\n");
 
         printf("10 - wyswietl zawartosc listy\n");
         printf("0 - wyjdz\n\n");
@@ -66,7 +67,7 @@ int main()
             case 4:
                 //funkcja usuwania ostatniego elementu listy
                 printf("\n");
-                UsunPierwszy(&_l);
+                UsunOstatni(&_l);
                 printf("\n");
                 break;
             case 5:
@@ -75,7 +76,7 @@ int main()
                 printf("podaj liczbe ktora chcesz odszukac: ");
                 scanf("%d", &number);
                 lista *q = OdszukajElement(&_l, number);
-                if(*q != NULL)
+                if(q != NULL)
                 {
                     printf("znaleziono element %d\n", (*q)->klucz);
                 }
