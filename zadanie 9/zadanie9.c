@@ -5,7 +5,7 @@
 
 int main()
 {
-    int choice, number, gdzie, opcja, ktore;
+    int choice, number, gdzie, opcja;
     
     lista _l = 0;
 
@@ -66,7 +66,7 @@ int main()
             case 4:
                 //funkcja usuwania ostatniego elementu listy
                 printf("\n");
-                UsunOstatni(&_l);
+                UsunPierwszy(&_l);
                 printf("\n");
                 break;
             case 5:
@@ -74,41 +74,43 @@ int main()
                 printf("\n");
                 printf("podaj liczbe ktora chcesz odszukac: ");
                 scanf("%d", &number);
-                OdszukajElement(_l, number);
-                printf("\n");
-                break;
-            case 6:
-                //funkcja dodajaca przed lub za
-                printf("\n");
-                printf("podaj liczbe ktora chcesz dodac jako nowy element: ");
-                scanf("%d", &number);
-                printf("\npodaj liczbe przed lub za ktora chcesz dodac nowy element: ");
-                scanf("%d", &gdzie);
-                printf("\n1 - dodaj przed\n");
-                printf("2 - dodaj za\n");
-                printf("Wybierz opcje: ");
-                scanf("%d", &opcja);
-                printf("\n1 - dodaj tylko przy pierwszym napotkanym\n");
-                printf("2 - dodaj przy kazdym napotkanym\n");
-                printf("wybierz opcje: ");
-                scanf("%d", &ktore);
-                if (opcja == 1 || opcja == 2) {
-                    DodajPrzedLubZa(&_l, number, gdzie, opcja, ktore);
-                } else {
-                    printf("Niepoprawna opcja\n");
+                lista *q = OdszukajElement(&_l, number);
+                if(*q != NULL)
+                {
+                    printf("znaleziono element %d\n", (*q)->klucz);
+                }
+                else
+                {
+                    printf("nie znaleziono elementu %d\n", number);
                 }
                 printf("\n");
                 break;
+            case 6:
+                //funkcja dodajaca przed wskazanym elementem
+                printf("\n");
+                printf("podaj liczbe ktora chcesz dodac jako nowy element: ");
+                scanf("%d", &number);
+                printf("\npodaj liczbe przed ktora ma byc dodany nowy element: ");
+                scanf("%d", &gdzie);
+                DodajPrzed(&_l, number, gdzie);
+                printf("\n");
+                break;
             case 7:
+                //funkcja dodajaca za wskazanym elementem
+                printf("\n");
+                printf("podaj liczbe ktora chcesz dodac jako nowy element: ");
+                scanf("%d", &number);
+                printf("\npodaj liczbe za ktora ma byc dodany nowy element: ");
+                scanf("%d", &gdzie);
+                DodajZa(&_l, number, gdzie);
+                printf("\n");
+                break;
+            case 8:
                 //funkcja usuwajaca wskazany element
                 printf("\n");
                 printf("podaj liczbe ktora chcesz usunac: ");
                 scanf("%d", &number);
-                printf("\n1 - usun tylko pierwszy napotkany\n");
-                printf("2 - usun kazdy napotkany\n");
-                printf("wybierz opcje: ");
-                scanf("%d", &opcja);
-                UsunWskazany(&_l, number, opcja);
+                UsunWskazany(&_l, number);
                 printf("\n");
                 break;
             case 10:
