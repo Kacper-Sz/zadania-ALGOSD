@@ -2,6 +2,43 @@
 #include <stdlib.h>
 #include "funkcje.h"
 
+
+void WyswietlListeOdPoczatku(lista l)
+{
+    if(l == 0)
+    {
+        printf("\nlista jest pusta\n");
+        return;
+    }
+    while (l)
+    {
+        if(l->klucz == INT_MAX)
+        {
+            printf("Wartownik");
+            l = l->nast;
+            continue;
+        }
+        printf("%d ", l->klucz);
+        l = l->nast;
+    }
+    printf("\n\n");   
+}
+
+void WyswietlListeOdKonca(lista l)
+{
+    while(l->nast != NULL)
+    {
+        l = l->nast;
+    }
+    while(l != NULL)
+    {
+        printf("%d ", l->klucz);
+        l = l->poprz;
+    }
+    printf("\n");
+}
+
+//listy nieposortowane
 void DodajNaPoczatek(lista *l, int klucz)
 {
     lista nowy = malloc(sizeof(elListy));
@@ -131,26 +168,61 @@ void UsunWskazany(lista *l, int number)
     return UsunPierwszy(element);
 }
 
-void WyswietlListeOdPoczatku(lista l)
+
+//lista uporzadkowana
+
+void DodanieWartownika(lista *l)
 {
-    while(l != NULL)
+    //alokacja pamieci dla wartownika
+    lista wartownik = malloc(sizeof(elListy));
+    wartownik->klucz = INT_MAX;
+    //dodam na koniec wiec pole nast to 0
+    wartownik->nast = 0;
+    //dopoki nie znajdziemy ostatniego elementu
+    while(*l)
     {
-        printf("%d ", l->klucz);
-        l = l->nast;
+        l=&((*l)->nast);
     }
-    printf("\n");    
+    wartownik->poprz = *l;
+    //przypisanie ostatniego elementu jako wartownika
+    *l=wartownik;
 }
 
-void WyswietlListeOdKonca(lista l)
+
+void DodajDoPosortowanej(lista *l, int number)
 {
-    while(l->nast != NULL)
+    lista nowa = malloc(sizeof(elListy));
+    nowa->klucz = number;
+
+    if(*l == 0)
     {
-        l = l->nast;
+        nowa->nast = *l;
+        nowa->poprz = NULL;
+        *l = nowa;
+        return;
     }
-    while(l != NULL)
+
+    lista k = NULL;
+    //dopoki nie znajdziemy elementu wiekszego od tego co chcemu dodac
+    while(*l != NULL && (*l)->klucz < number)
     {
-        printf("%d ", l->klucz);
-        l = l->poprz;
+        //k przechowuje watosc na ktora wskazuje l
+        k = *l;
+        //adres czesci nastepnej
+        l = &((*l)->nast);
     }
-    printf("\n");
+    
+    nowa->nast = *l;
+    
+    if(*l != NULL)
+    {
+        nowa->poprz = (*l)->poprz;
+        (*l)->poprz = nowa;
+    }
+    else
+    {
+        nowa->poprz = k;
+    }
+
+    *l = nowa;
 }
