@@ -337,3 +337,53 @@ void UsunWskazanyPosortowanaWartownik(lista *l, int number)
         printf("element %d nie znajduje sie na liscie.\n", number);
     }
 }
+
+
+lista* ZnajdzPierwszy(lista *l)
+{
+    return l;
+}
+
+lista* ZnajdzPierwszyWartownik(lista *l)
+{
+    if((*l)->klucz == INT_MAX)
+    {
+        return NULL;
+    }
+    return l;
+}
+
+//znajdowanie ostatniego elementu
+lista* ZnajdzOstatni(lista *l)
+{
+    //jesli lista jest pusta
+    if (l == NULL) {
+        //printf("Lista jest pusta.\n");
+        return NULL;
+    }
+    //ide na koniec listy
+    while ((*l)->nast != NULL) {
+        l = &((*l)->nast);
+    }
+    //zwracam ostatni element
+    return l;
+}
+
+
+//znajdowanie ostatniego elementu z wartownikiem
+lista* ZnajdzOstatniWartownik(lista *l)
+{
+    //jesli lista jest pusta
+    if((*l)->klucz == INT_MAX)
+    {
+        return NULL;
+    }
+    //ide na koniec listy
+    //sprawdzam czy element po wartowniku nie jest nullem
+    while((*l)->nast->klucz != INT_MAX)
+    {
+        l = &((*l)->nast);
+    }
+    //zwracam ostatni element
+    return l;
+}

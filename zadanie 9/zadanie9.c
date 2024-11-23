@@ -235,6 +235,45 @@ int main()
                     printf("lista jest pusta\n");
                 }
                 break;
+            case 18:
+                //funkcja pobierajaca pierwszy element z listy posortowanej z wartownikiem
+                printf("\n");
+                lista *pierwszyWartownik = ZnajdzPierwszyWartownik(&_l);
+                if(pierwszyWartownik)
+                {
+                    printf("pierwszy element to %d\n", (*pierwszyWartownik)->klucz);
+                }
+                else
+                {
+                    printf("lista jest pusta\n");
+                }
+                break;
+            case 19:
+                //funkcja pobierajaca ostatni element z listy posortowanej
+                printf("\n");
+                lista *ostatni = ZnajdzOstatni(&_l);
+                if(ostatni)
+                {
+                    printf("ostatni element to %d\n", (*ostatni)->klucz);
+                }
+                else
+                {
+                    printf("lista jest pusta\n");
+                }
+                break;
+            case 20:
+                //funkcja pobierajaca ostatni element z listy posortowanej z wartownikiem
+                printf("\n");
+                lista *ostatniWartownik = ZnajdzOstatniWartownik(&_l);
+                if(ostatniWartownik)
+                {
+                    printf("ostatni element to %d\n", (*ostatniWartownik)->klucz);
+                }
+                else
+                {
+                    printf("lista jest pusta\n");
+                }
+                break;
             default:
                 printf("\n");
                 printf("wybierz poprawne odpowiednia liczbe\n");
