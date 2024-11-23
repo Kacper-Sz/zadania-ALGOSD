@@ -26,5 +26,21 @@ void UsunWskazany(lista *l, int number);
 void DodanieWartownika(lista *l);
 
 
-void DodajDoPosortowanej(lista *l, int klucz);
+void DodajDoPosortowanej(lista *l, int number);
 void DodajDoPosortowanejWartownik(lista *l, int number);
+
+
+lista * ZnajdzPosortowana(lista *l, int number);
+lista * ZnajdzPosortowanaWartownik(lista *l, int number);
+
+
+void UsunWskazanyPosortowana(lista *l, int number);
+void UsunWskazanyPosortowanaWartownik(lista *l, int number);
+
+
+lista* ZnajdzPierwszy(lista *l);
+lista* ZnajdzPierwszyWartownik(lista *l);
+
+
+lista* ZnajdzOstatni(lista *l);
+lista* ZnajdzOstatniWartownik(lista *l);

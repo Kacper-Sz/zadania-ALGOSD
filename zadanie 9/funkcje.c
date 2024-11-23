@@ -32,6 +32,12 @@ void WyswietlListeOdKonca(lista l)
     }
     while(l != NULL)
     {
+        if(l->klucz == INT_MAX)
+        {
+            printf("Wartownik ");
+            l = l->poprz;
+            continue;
+        }
         printf("%d ", l->klucz);
         l = l->poprz;
     }
@@ -225,4 +231,109 @@ void DodajDoPosortowanej(lista *l, int number)
     }
 
     *l = nowa;
+}
+
+
+void DodajDoPosortowanejWartownik(lista *l, int number)
+{
+    if(*l == 0)
+    {
+        printf("lista nie posiada wartownika");
+        return;
+    }
+
+    while((*l)->klucz < number)
+    {
+        l = &((*l)->nast);
+    }
+
+    lista nowa = malloc(sizeof(elListy));
+    nowa->klucz = number;
+    nowa->nast = *l;
+    nowa->poprz = (*l)->poprz;
+    (*l)->poprz = nowa;
+    *l = nowa;
+}
+
+
+lista* ZnajdzPosortowana(lista *l, int number)
+{
+    //dopoki nie znajdziemy elementu wiekszego od tego co chcemu dodac
+    while((*l) != NULL && (*l)->klucz < number)
+    {
+        l = &((*l)->nast);
+    }
+    //jesli nie ma elementu lub jest nie rowny
+    if((*l) == NULL || (*l)->klucz != number)
+    {
+        return NULL;
+    }
+    else
+    {
+        return l;
+    }
+}
+
+lista* ZnajdzPosortowanaWartownik(lista *l, int number)
+{
+    while((*l)->klucz < number)
+    {
+        l = &((*l)->nast);
+    }
+
+    if((*l)->klucz == number)
+    {
+        return l;
+    }
+    else
+    {
+        return NULL;
+    }
+}
+
+
+void UsunWskazanyPosortowana(lista *l, int number)
+{
+    lista element = 0;
+    while((*l) != NULL && (*l)->klucz < number)
+    {
+        element = *l;
+        l = &((*l)->nast);
+    }
+
+    if((*l) != NULL && (*l)->klucz == number)
+    {
+        lista nowa = *l;
+        *l = (*l)->nast;
+        (*l)->poprz = element;
+        free(nowa);
+    }
+    else
+    {
+        printf("element %d nie znajduje sie na liscie.\n", number);
+    }
+
+}
+
+
+void UsunWskazanyPosortowanaWartownik(lista *l, int number)
+{
+    lista element = 0;
+    while((*l)->klucz < number)
+    {
+        element = *l;
+        l = &((*l)->nast);
+    }
+
+    if((*l)->klucz == number)
+    {
+        lista nowa = *l;
+        *l = (*l)->nast;
+        (*l)->poprz = element;
+        free(nowa);
+    }
+    else
+    {
+        printf("element %d nie znajduje sie na liscie.\n", number);
+    }
 }

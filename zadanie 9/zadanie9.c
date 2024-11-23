@@ -27,8 +27,32 @@ int main()
         printf("\n");
 
         printf("10 - dodaj wartownik\n");
-        printf("11 - dodaj element do listy posortowanej\n");
 
+
+        printf("11 - dodaj element do listy posortowanej\n");
+        printf("12 - dodaj element do listy posortowanej z wartownikiem\n");
+
+        printf("\n");
+
+        printf("13 - znajdz element w liscie posrtowanej\n");
+        printf("14 - znajdz element w liscie posortowanej z wartownikiem\n");
+
+        printf("\n");
+
+        printf("15 - usun wskazany element z listy posortowanej\n");
+        printf("16 - usun wskazany element z listy posortowanej z wartownikiem\n");
+
+        printf("\n");
+
+        printf("17 - pobierz pierwszy element z listy posortowanej\n");
+        printf("18 - pobierz pierwszy element z listy posortowanej z wartownikiem\n");
+
+        printf("\n");
+
+        printf("19 - pobierz ostatni element z listy posortowanej\n");
+        printf("20 - pobierz ostatni element z listy posortowanej z wartownikiem\n");
+
+        printf("\n");
         
         printf("0 - wyjdz\n\n");
 
@@ -145,6 +169,71 @@ int main()
                 scanf("%d", &number);
                 DodajDoPosortowanej(&_l, number);
                 printf("\n");
+                break;
+            case 12:
+                //funkcja dodajaca element do listy posortowanej z wartownikiem
+                printf("\n");
+                printf("podaj liczbe ktora chcesz dodac: ");
+                scanf("%d", &number);
+                DodajDoPosortowanejWartownik(&_l, number);
+                printf("\n");
+                break;
+            case 13:
+                //funkcja znajdujaca element w liscie posortowanej
+                printf("\n");
+                printf("podaj liczbe ktora chcesz znalezc: ");
+                scanf("%d", &number);
+                lista *znaleziony = ZnajdzPosortowana(&_l, number);
+                if(znaleziony)
+                {
+                    printf("znaleziono element %d\n", (*znaleziony)->klucz);
+                }
+                else
+                {
+                    printf("nie znaleziono elementu %d\n", number);
+                }
+                break;
+            case 14:
+                //funkcja znajdujaca element w liscie posortowanej z wartownikiem
+                printf("\n");
+                printf("podaj liczbe ktora chcesz znalezc: ");
+                scanf("%d", &number);
+                lista *znalezionyWartownik = ZnajdzPosortowanaWartownik(&_l, number);
+                if(znalezionyWartownik)
+                {
+                    printf("znaleziono element %d\n", (*znalezionyWartownik)->klucz);
+                }
+                else
+                {
+                    printf("nie znaleziono elementu %d\n", number);
+                }
+                break;
+            case 15:
+                //funkcja usuwajaca wskazany element z listy posortowanej
+                printf("\n");
+                printf("podaj liczbe ktora chcesz usunac: ");
+                scanf("%d", &number);
+                UsunWskazanyPosortowana(&_l, number);
+                break;
+            case 16:
+                //funkcja usuwajaca wskazany element z listy posortowanej z wartownikiem
+                printf("\n");
+                printf("podaj liczbe ktora chcesz usunac: ");
+                scanf("%d", &number);
+                UsunWskazanyPosortowanaWartownik(&_l, number);
+                break;
+            case 17:
+                //funkcja pobierajaca pierwszy element z listy posortowanej
+                printf("\n");
+                lista *pierwszy = ZnajdzPierwszy(&_l);
+                if(pierwszy)
+                {
+                    printf("pierwszy element to %d\n", (*pierwszy)->klucz);
+                }
+                else
+                {
+                    printf("lista jest pusta\n");
+                }
                 break;
             default:
                 printf("\n");
