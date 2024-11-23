@@ -14,6 +14,7 @@ typedef elListy *lista;
 //listy nieposortowane
 void WyswietlListeOdPoczatkuA(lista l);
 void WyswietlListeOdKoncaA(lista l);
+
 void DodajNaPoczatekA(lista *l, int number);
 
 void DodajNaKoniecA(lista *l, int number);
