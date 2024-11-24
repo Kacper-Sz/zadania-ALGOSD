@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "funkcje.h"
+#include "funkcjeA.h"
 
 
 void WyswietlListeOdPoczatkuA(lista l)
@@ -22,9 +22,18 @@ void WyswietlListeOdPoczatkuA(lista l)
 
 void WyswietlListeOdKoncaA(lista l)
 {
-    if(l!= NULL)
+    if(l == NULL)
     {
-        printf("xd");
+        printf("lista jest pusta\n");
+        return;
+    }
+
+    lista q = l;
+    
+    if(q->nast != l)
+    {
+        WyswietlListeOdKoncaA(q->nast);
+        printf("%d ", q->klucz);
     }
 }
 

@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "funkcje.h"
+#include "funkcjeA.h"
+#include "funkcjeB.h"
 
 int main()
 {
@@ -14,16 +15,18 @@ int main()
         printf("\n");
         printf("------------------------------------\n");
         printf("nastepna operacja: \n");
-        printf("1 - wyswietl zawartosc listy\n");
-        printf("2 - dodaj element na poczatku listy\n");
-        printf("3 - dodaj element na koncu listy\n");
-        printf("4 - usun pierwszy element listy\n");
-        printf("5 - usun ostatni element listy\n");
-        printf("6 - odszukaj zadany element\n");
-        printf("7 - dodaj element przed\n");\
-        printf("8 - dodaj element za\n");
-        printf("9 - usun wskazany element\n");
-
+        printf("1 - A - wyswietl zawartosc listy\n");
+        printf("2 - A - dodaj element na poczatku listy\n");
+        printf("3 - A - dodaj element na koncu listy\n");
+        printf("4 - A - usun pierwszy element listy\n");
+        printf("5 - A - usun ostatni element listy\n");
+        printf("6 - A - odszukaj zadany element\n");
+        printf("7 - A - dodaj element przed\n");\
+        printf("8 - A - dodaj element za\n");
+        printf("9 - A - usun wskazany element\n");
+        printf("\n");
+        printf("------------------------------------\n");
+        printf("10 - B - wyswietl zawartosc listy\n");
         
         printf("0 - wyjdz\n\n");
 
