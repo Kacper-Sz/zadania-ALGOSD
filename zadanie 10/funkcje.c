@@ -117,30 +117,44 @@ void UsunOstatniA(lista *l)
 }
 
 
-lista OdszukajElementA(lista *l, int element)
+lista *OdszukajElementA(lista *l, int element)
 {
-    if (*l == NULL)
+    if (*l == NULL) // Jeśli lista jest pusta
     {
         return NULL;
     }
 
-    lista q = *l;
+    lista *q = l; // Zacznij od wskaźnika na pierwszy element listy
     do
     {
-        if (q->klucz == element) 
+        if ((*q)->klucz == element) // Jeśli znaleziono element
         {
-            return q;
+            return q; // Zwróć wskaźnik do wskaźnika na ten element
         }
-        q = q->nast; 
-    } while (q != *l); 
+        q = &((*q)->nast); // Przejdź do wskaźnika na następny element
+    } while (*q != *l); // Powtarzaj dopóki nie wrócisz do początku listy
 
-    return NULL; 
+    return NULL; // Jeśli nie znaleziono elementu
 }
-
 
 void DodajPrzedA(lista *l, int element, int gdzie)
 {
-    return;
+    if(*l == NULL)
+    {
+        return;
+    }
+
+    lista *q = OdszukajElementA(l, gdzie);
+
+    if(q == NULL)
+    {
+        return;
+    }
+
+    lista nowa = (lista)malloc(sizeof(elListy));
+    nowa->klucz = element;
+    nowa->nast = *q;
+    *q = nowa;
 }
 
 
