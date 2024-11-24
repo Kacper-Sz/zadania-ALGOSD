@@ -151,6 +151,10 @@ void DodajPrzedB(listaB *l, int element, int gdzie)
     nowa->poprz = (*q)->poprz;
     (*q)->poprz->nast = nowa;
     (*q)->poprz = nowa;
+    if(*q == *l)
+    {
+        *l = nowa;
+    }
 }
 
 void DodajZaB(listaB *l, int element, int gdzie)
