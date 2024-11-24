@@ -22,6 +22,22 @@ void WyswietlListeOdPoczatkuA(lista l)
 
 void WyswietlListeOdKoncaA(lista l)
 {
+    /*
+    if (l == NULL) {
+        printf("lista jest pusta\n");
+        return;
+    }
+
+    lista q = l;
+
+    // Check if the list is not circular or handle the circular list case properly
+    if (q->nast != NULL && q->nast != l)
+    {
+        WyswietlListeOdKoncaA(q->nast);
+    }
+    printf("%d ", q->klucz);
+    */
+
     if(l == NULL)
     {
         printf("lista jest pusta\n");
@@ -29,11 +45,19 @@ void WyswietlListeOdKoncaA(lista l)
     }
 
     lista q = l;
-    
-    if(q->nast != l)
+    lista odwrotna = NULL;
+    while(q->nast != l)
     {
-        WyswietlListeOdKoncaA(q->nast);
-        printf("%d ", q->klucz);
+        DodajNaPoczatekA(&odwrotna, q->klucz);
+        q = q->nast;
+    }
+    DodajNaPoczatekA(&odwrotna, q->klucz);
+
+    WyswietlListeOdPoczatkuA(odwrotna);
+
+    while(odwrotna != NULL)
+    {
+        UsunPierwszyA(&odwrotna);
     }
 }
 
