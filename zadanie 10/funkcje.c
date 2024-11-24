@@ -22,35 +22,20 @@ void WyswietlListeOdPoczatkuA(lista l)
 
 void WyswietlListeOdKoncaA(lista l)
 {
-    if(l == NULL)
+    if(l!= NULL)
     {
-        printf("lista jest pusta\n");
-        return;
-    }
-    lista q = l;
-    if(l != 0)
-    {
-        if(l->nast == q)
-        {
-            printf("%d ", l->klucz);
-        }
-        else
-        {
-            WyswietlListeOdKoncaA(l->nast);
-            printf("%d ", l->klucz);
-        }
+        printf("xd");
     }
 }
 
 
 void DodajNaPoczatekA(lista *l, int number)
 {
-    //tworzenie nowego elementu listy
-    lista nowa = (lista)malloc(sizeof(elListy));
-    nowa->klucz = number;
-    
+    lista nowa = malloc(sizeof(elListy));
+
     if(*l == NULL)
     {
+        nowa->klucz = number;
         nowa->nast = nowa;
         *l = nowa;
     }
@@ -87,33 +72,38 @@ void UsunPierwszyA(lista *l)
         }
         free(q);
     }
+    return;
 }
 
 void UsunOstatniA(lista *l)
 {
-    if(*l == NULL)
+    if (*l == NULL) // Jeśli lista jest pusta
     {
         return;
     }
 
-    lista q;
-
-    if((*l)->nast == *l)
+    if ((*l)->nast == *l) // Jeśli lista ma tylko jeden element
     {
         free(*l);
         *l = NULL;
+        return;
     }
-    else
+
+    lista przedostatni = NULL;
+    lista ostatni = *l;
+
+    // Znajdź przedostatni i ostatni element
+    while (ostatni->nast != *l)
     {
-        q = *l;
-        while(q->nast != *l)
-        {
-            q = q->nast;
-        }
-        q->nast = (*l)->nast;
-        free(*l);
-        *l = q;
+        przedostatni = ostatni;
+        ostatni = ostatni->nast;
     }
+
+    // przedostatni->nast powinien wskazywać na pierwszy element
+    przedostatni->nast = *l;
+
+    // Zwolnij pamięć zajmowaną przez ostatni element
+    free(ostatni);
 }
 
 
@@ -153,18 +143,78 @@ void DodajPrzedA(lista *l, int element, int gdzie)
 
     lista nowa = (lista)malloc(sizeof(elListy));
     nowa->klucz = element;
-    nowa->nast = *q;
-    *q = nowa;
+
+    if(*q == *l) //jak przed 1. elementem
+    {
+        DodajNaPoczatekA(l, element);
+    }
+    else
+    {
+        nowa->nast = *q;
+        *q = nowa;
+    }
 }
 
 
 void DodajZaA(lista *l, int element, int gdzie)
 {
-    return;
+    if(*l == NULL)
+    {
+        return;
+    }
+
+    lista *q = OdszukajElementA(l, gdzie);
+
+    if(q == NULL)
+    {
+        return;
+    }
+
+    lista nowa = (lista)malloc(sizeof(elListy));
+    nowa->klucz = element;
+    nowa->nast = (*q)->nast;
+    (*q)->nast = nowa;
 }
 void UsunWskazanyA(lista *l, int number)
 {
-    return;
+    if(*l == NULL)
+    {
+        return;
+    }
+
+    lista *q = OdszukajElementA(l, number);
+
+    if(q == NULL)
+    {
+        return;
+    }
+
+    lista dousuniecia = *q;
+    if (*q == *l) // Jeśli usuwamy pierwszy element
+    {
+        if ((*l)->nast == *l) // Jeśli lista ma tylko jeden element
+        {
+            free(*l);
+            *l = NULL;
+        }
+        else
+        {
+            *l = (*l)->nast;
+            lista ostatni = *l;
+            while (ostatni->nast != dousuniecia)
+            {
+                ostatni = ostatni->nast;
+            }
+            ostatni->nast = *l;
+        }
+    }
+    else
+    {
+        *q = (*q)->nast;
+    }
+
+    free(dousuniecia);
+    
 }
 
 
