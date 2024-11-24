@@ -221,6 +221,3 @@ void UsunWskazanyA(lista *l, int number)
 
 
 
-
-
-
