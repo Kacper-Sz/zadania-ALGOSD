@@ -117,24 +117,24 @@ void UsunOstatniA(lista *l)
 }
 
 
-lista* OdszukajElementA(lista *l, int element)
+lista OdszukajElementA(lista *l, int element)
 {
-    if((*l) == NULL)
+    if (*l == NULL)
     {
         return NULL;
     }
 
     lista q = *l;
-    while(*l != q->nast)
+    do
     {
-        if(q->klucz == element)
+        if (q->klucz == element) 
         {
-            return &q;
+            return q;
         }
-        q = q->nast;
-    }
+        q = q->nast; 
+    } while (q != *l); 
 
-    return NULL;
+    return NULL; 
 }
 
 
@@ -142,6 +142,8 @@ void DodajPrzedA(lista *l, int element, int gdzie)
 {
     return;
 }
+
+
 void DodajZaA(lista *l, int element, int gdzie)
 {
     return;
