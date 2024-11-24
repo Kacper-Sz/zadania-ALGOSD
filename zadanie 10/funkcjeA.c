@@ -22,22 +22,6 @@ void WyswietlListeOdPoczatkuA(lista l)
 
 void WyswietlListeOdKoncaA(lista l)
 {
-    /*
-    if (l == NULL) {
-        printf("lista jest pusta\n");
-        return;
-    }
-
-    lista q = l;
-
-    // Check if the list is not circular or handle the circular list case properly
-    if (q->nast != NULL && q->nast != l)
-    {
-        WyswietlListeOdKoncaA(q->nast);
-    }
-    printf("%d ", q->klucz);
-    */
-
     if(l == NULL)
     {
         printf("lista jest pusta\n");
@@ -59,6 +43,24 @@ void WyswietlListeOdKoncaA(lista l)
     {
         UsunPierwszyA(&odwrotna);
     }
+}
+/*
+// inny sposob na wyswietlanie listy od konca
+void WyswietlListeOdKoncaA(lista l) {
+    if (l == NULL) {
+        printf("Lista jest pusta.\n");
+        return;
+    }
+    WypiszOdKoncaRek(l, l);
+    printf("\n");
+}
+*/
+
+void WypiszOdKoncaRekA(elListy *obecny, elListy *start) {
+    if (obecny->nast != start) {
+        WypiszOdKoncaRekA(obecny->nast, start);
+    }
+    printf("%d ", obecny->klucz);
 }
 
 
