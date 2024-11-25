@@ -100,7 +100,6 @@ void UsunPowtorzenia(lista *l, lista *q)
                 obecny = obecny->nast;
             }
         } while (obecny != *l); // Przejście przez całą listę l
-
         obecnyQ = obecnyQ->nast; // Przejście do kolejnego elementu w liście q
     } while (obecnyQ != *q); // Przejście przez całą listę q
 }
