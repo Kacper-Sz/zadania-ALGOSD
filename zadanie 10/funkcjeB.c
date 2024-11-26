@@ -13,6 +13,7 @@ void WyswietlListeOdPoczatkuB(listaB l)
     listaB q = l;
     do
     {
+        //wypisuje klucz elementu i przechodze do nastepnego dopoki nie wroce do poczatku
         printf("%d ", q->klucz);
         q = q->nast;
     } while(q != l);
@@ -28,6 +29,7 @@ void WyswietlListeOdKoncaB(listaB l)
     }
 
     listaB q = l;
+    //przechodze do ostatniego elementu
     while(q->poprz != l)
     {
         q = q->poprz;
@@ -42,6 +44,7 @@ void DodajNaPoczatekB(listaB *l, int number)
 {
     listaB nowaB = malloc(sizeof(elListyB));
 
+    //jak null to dodaje pierwszy element
     if(*l == NULL)
     {
         nowaB->klucz = number;
@@ -62,18 +65,22 @@ void DodajNaPoczatekB(listaB *l, int number)
 
 void DodajNaKoniecB(listaB *l, int number)
 {
+    //dodaje na poczatek i przesuwam wskaznik na nastepny element zeby dodac na koncu
     DodajNaPoczatekB(l, number);
     *l = (*l)->nast;
 }
 
 void UsunPierwszyB(listaB *l)
 {
+    //jak null to nic nie robie
     if(*l == NULL)
     {
         return;
     }
 
+
     listaB q = *l;
+    //jak jeden element to usuwam go
     if(q->nast == q)
     {
         free(q);
@@ -90,12 +97,14 @@ void UsunPierwszyB(listaB *l)
 
 void UsunOstatniB(listaB *l)
 {
+    //jak null to nic nie robie
     if(*l == NULL)
     {
         return;
     }
 
     listaB q = *l;
+    //jak jeden element to usuwam go
     if(q->nast == q)
     {
         free(q);
@@ -113,18 +122,21 @@ void UsunOstatniB(listaB *l)
 
 listaB* OdszukajElementB(listaB *l, int element)
 {
+    //jak null to nic nie robie
     if(*l == NULL)
     {
         return NULL;
     }
 
     listaB *q = l;
-    do
+    do //przechodze przez liste dopoki nie wroce do poczatku
     {
+        //jak znajde element to zwracam wskaznik na niego
         if((*q)->klucz == element)
         {
             return q;
         }
+        //przechodze do adresu czesci nastepnka
         q = &((*q)->nast);
     } while(*q != *l);
 
@@ -137,20 +149,21 @@ void DodajPrzedB(listaB *l, int element, int gdzie)
     {
         return;
     }
-
+    //szukam elementu
     listaB *q = OdszukajElementB(l, gdzie);
-
+    //jak nie ma to nic nie robie
     if(q == NULL)
     {
         return;
     }
-
+    //tworze nowy element i dodaje go przed znalezionym
     listaB nowa = malloc(sizeof(elListyB));
     nowa->klucz = element;
     nowa->nast = *q;
     nowa->poprz = (*q)->poprz;
     (*q)->poprz->nast = nowa;
     (*q)->poprz = nowa;
+    //jak dodaje przed pierwszym elementem to przesuwam wskaznik na poczatek
     if(*q == *l)
     {
         *l = nowa;
@@ -159,18 +172,19 @@ void DodajPrzedB(listaB *l, int element, int gdzie)
 
 void DodajZaB(listaB *l, int element, int gdzie)
 {
+    //jak null to nic nie robie
     if(*l == NULL)
     {
         return;
     }
-
+    //szukam elementu
     listaB *q = OdszukajElementB(l, gdzie);
 
     if(q == NULL)
     {
         return;
     }
-
+    //tworze nowy element i dodaje go za znalezionym
     listaB nowa = malloc(sizeof(elListyB));
     nowa->klucz = element;
     nowa->nast = (*q)->nast;
@@ -192,7 +206,7 @@ void UsunWskazanyB(listaB *l, int number)
     {
         return;
     }
-
+    //jak usuwam pierwszy element to przesuwam wskaznik na poczatek
     listaB doUsuniecia = *q;
     if(doUsuniecia == *l)
     {

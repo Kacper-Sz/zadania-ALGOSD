@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "funkcjeA.h"
 
+//listy nieposortowane cykliczne
 
 void WyswietlListeOdPoczatkuA(lista l)
 {
@@ -44,24 +45,8 @@ void WyswietlListeOdKoncaA(lista l)
         UsunPierwszyA(&odwrotna);
     }
 }
-/*
-// inny sposob na wyswietlanie listy od konca
-void WyswietlListeOdKoncaA(lista l) {
-    if (l == NULL) {
-        printf("Lista jest pusta.\n");
-        return;
-    }
-    WypiszOdKoncaRek(l, l);
-    printf("\n");
-}
-*/
 
-void WypiszOdKoncaRekA(elListy *obecny, elListy *start) {
-    if (obecny->nast != start) {
-        WypiszOdKoncaRekA(obecny->nast, start);
-    }
-    printf("%d ", obecny->klucz);
-}
+
 
 
 void DodajNaPoczatekA(lista *l, int number)
@@ -76,15 +61,19 @@ void DodajNaPoczatekA(lista *l, int number)
     }
     else
     {
+        //dodaje nowy element za pierwszym
+        //przepisuje klucz pierwszego elementu na nowy
         nowa->klucz = (*l)->klucz;
         (*l)->klucz = number;
         nowa->nast = (*l)->nast;
         (*l)->nast = nowa;
+
     }
 }
 
 void DodajNaKoniecA(lista *l, int number)
 {
+    //dodanie na poczaatek i zmiana pierwszego elementu
     DodajNaPoczatekA(l, number);
     *l = (*l)->nast;
 }
@@ -92,19 +81,24 @@ void DodajNaKoniecA(lista *l, int number)
 void UsunPierwszyA(lista *l)
 {
     lista q;
+    //jesli lista nie jest pusta
     if(*l != NULL)
     {
+        //q to drugi element listy
         q = (*l)->nast;
-        //jesli lista ma tylko jeden element
+        //jesli lista ma tylko jeden element to staje sie pusta
         if(q == *l)
         {
             *l = NULL;
         }
         else
         {
+            //przepisanie drugiego elementu na pierwszy
+            //zeby nie utracic wskaznika na pierwszy element (cyklicznosc)
             (*l)->klucz = q->klucz;
             (*l)->nast = q->nast;
         }
+        //usuwam q
         free(q);
     }
     return;
@@ -112,79 +106,95 @@ void UsunPierwszyA(lista *l)
 
 void UsunOstatniA(lista *l)
 {
-    if (*l == NULL) // Jeśli lista jest pusta
+    //jak lista pusta
+    if (*l == NULL)
     {
         return;
     }
 
-    if ((*l)->nast == *l) // Jeśli lista ma tylko jeden element
+    //jeśli lista ma tylko jeden element
+    if ((*l)->nast == *l) 
     {
         free(*l);
         *l = NULL;
         return;
     }
 
+    //znajduej przedostatni i ostatni element
     lista przedostatni = NULL;
     lista ostatni = *l;
 
-    // Znajdź przedostatni i ostatni element
+    //ostatni elemet to ten co wskazuje na pierwszy
     while (ostatni->nast != *l)
     {
         przedostatni = ostatni;
         ostatni = ostatni->nast;
     }
 
-    // przedostatni->nast powinien wskazywać na pierwszy element
+    //przedostatni jest nowym koncem listy
     przedostatni->nast = *l;
 
-    // Zwolnij pamięć zajmowaną przez ostatni element
+    //usuwam ostatni
     free(ostatni);
 }
 
 
 lista *OdszukajElementA(lista *l, int element)
 {
-    if (*l == NULL) // Jeśli lista jest pusta
+    //jak lista jest pusta
+    if (*l == NULL)
     {
         return NULL;
     }
 
-    lista *q = l; // Zacznij od wskaźnika na pierwszy element listy
+
+    lista *q = l;
     do
     {
-        if ((*q)->klucz == element) // Jeśli znaleziono element
+        //jeśli znaleziono element
+        if ((*q)->klucz == element)
         {
-            return q; // Zwróć wskaźnik do wskaźnika na ten element
+            //zwracam wkaznik na ten element (wskaźnik na wskaźnik)
+            return q;
         }
-        q = &((*q)->nast); // Przejdź do wskaźnika na następny element
-    } while (*q != *l); // Powtarzaj dopóki nie wrócisz do początku listy
+        //przechodze do nastepnego adresu nastepnika
+        q = &((*q)->nast);
+    //dopóki nie wrócę do początku
+    } while (*q != *l);
 
-    return NULL; // Jeśli nie znaleziono elementu
+    //jak nic nie znaleziono to null
+    return NULL;
 }
 
 void DodajPrzedA(lista *l, int element, int gdzie)
 {
+    //jak lista pusta
     if(*l == NULL)
     {
         return;
     }
 
+    //odszukuje element przed którym chce wstawić nowy element
     lista *q = OdszukajElementA(l, gdzie);
-
+    //jak nie znaleziono elementu to nic nie robie
     if(q == NULL)
     {
         return;
     }
 
+    //tworze nowy element
     lista nowa = (lista)malloc(sizeof(elListy));
     nowa->klucz = element;
 
-    if(*q == *l) //jak przed 1. elementem
+    //jak dodaje przed 1. elementem
+    if(*q == *l)
     {
+        //dodaje na poczatek
         DodajNaPoczatekA(l, element);
     }
     else
     {
+        //dodaje przed elementem
         nowa->nast = *q;
         *q = nowa;
     }
@@ -193,46 +203,56 @@ void DodajPrzedA(lista *l, int element, int gdzie)
 
 void DodajZaA(lista *l, int element, int gdzie)
 {
+    //jak lista pusta to nic nie robie
     if(*l == NULL)
     {
         return;
     }
 
+    //odszukuje element za którym chce wstawić nowy element
     lista *q = OdszukajElementA(l, gdzie);
 
+    //jak nie znaleziono/nie ma elementu to nic nie robie
     if(q == NULL)
     {
         return;
     }
 
+    //tworze nowy element
     lista nowa = (lista)malloc(sizeof(elListy));
     nowa->klucz = element;
+    //dodaje za elementem
     nowa->nast = (*q)->nast;
     (*q)->nast = nowa;
 }
 void UsunWskazanyA(lista *l, int number)
 {
+    //jak lista pusta to nic nie robie
     if(*l == NULL)
     {
         return;
     }
 
+    //odszukuje element do usunięcia
     lista *q = OdszukajElementA(l, number);
 
+    //jak nie znaleziono/nie ma elementu to nic nie robie
     if(q == NULL)
     {
         return;
     }
 
+    //jeśli usuwamy pierwszy element
     lista dousuniecia = *q;
-    if (*q == *l) // Jeśli usuwamy pierwszy element
+    if (*q == *l)
     {
-        if ((*l)->nast == *l) // Jeśli lista ma tylko jeden element
+        //jeśli lista ma tylko jeden element
+        if ((*l)->nast == *l)
         {
             free(*l);
             *l = NULL;
         }
-        else
+        else //jeśli lista ma więcej elementów
         {
             *l = (*l)->nast;
             lista ostatni = *l;
@@ -243,11 +263,11 @@ void UsunWskazanyA(lista *l, int number)
             ostatni->nast = *l;
         }
     }
-    else
+    else //jeśli usuwamy inny element niż pierwszy
     {
         *q = (*q)->nast;
     }
-
+    //usuwam element
     free(dousuniecia);
     
 }

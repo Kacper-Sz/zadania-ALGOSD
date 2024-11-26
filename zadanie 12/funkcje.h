@@ -18,5 +18,4 @@ void DodajNaKoniec(lista *l, int number);
 void DodajNaPoczatek(lista *l, int number);
 
 //usuwa z listy l powtorzenia elementow z listy q
-void UsunPowtorzenia(lista *l, lista *q);
-
+void UsunPowtorzenia(lista *l, lista q);

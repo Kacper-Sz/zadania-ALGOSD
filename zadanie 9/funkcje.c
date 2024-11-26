@@ -26,10 +26,12 @@ void WyswietlListeOdPoczatku(lista l)
 
 void WyswietlListeOdKonca(lista l)
 {
+    //przechodze na koniec listy
     while(l->nast != NULL)
     {
         l = l->nast;
     }
+    //dopoki nie dojde do poczatku
     while(l != NULL)
     {
         if(l->klucz == INT_MAX)
@@ -50,15 +52,17 @@ void DodajNaPoczatek(lista *l, int klucz)
     lista nowy = malloc(sizeof(elListy));
     nowy->klucz = klucz;
     nowy->nast = *l;
+    //jesli lista nie jest pusta
     if(*l != NULL)
     {
         nowy->poprz = (*l)->poprz;
         (*l)->poprz = nowy;
     }
-    else
+    else    //jesli lista jest pusta
     {
         nowy->poprz = NULL;
     }
+    //przypisanie nowego elementu jako pierwszego
     *l = nowy;
 }
 
@@ -83,12 +87,14 @@ void UsunPierwszy(lista *l)
         return;
     }
 
+    //przechowuje adres pierwszego elementu
     lista nowy = *l;
+    //jesli jest tylko jeden element
     if((*l)->nast == NULL)
     {
         *l = NULL;
     }
-    else
+    else //jesli jest wiecej elementow
     {
         *l = (*l)->nast;
         (*l)->poprz = nowy->poprz;
@@ -102,7 +108,7 @@ void UsunOstatni(lista *l)
     {
         return;
     }
-
+    //ide na koniec listy
     while((*l)->nast != NULL)
     {
         l = &((*l)->nast);
@@ -116,6 +122,7 @@ lista* OdszukajElement(lista *l, int element)
     {
         if((*l)->klucz == element)
         {
+            //jak znajde element to zwracam adres na ten element
             return l;
         }
         l = &((*l)->nast);
@@ -135,6 +142,7 @@ void DodajPrzed(lista *l, int element, int gdzie)
     {
         if((*l)->klucz == gdzie)
         {
+            //jak znajde element to dodaje przed nim
             lista nowa = malloc(sizeof(elListy));
             nowa->klucz = element;
             nowa->nast = *l;
@@ -157,6 +165,7 @@ void DodajZa(lista *l, int element, int gdzie)
     {
         if((*l)->klucz == gdzie)
         {
+            //jak znajde element to dodaje za nim
             lista nowa = malloc(sizeof(elListy));
             nowa->klucz = element;
             nowa->nast = (*l)->nast;
@@ -220,6 +229,7 @@ void DodajDoPosortowanej(lista *l, int number)
     
     nowa->nast = *l;
     
+    
     if(*l != NULL)
     {
         nowa->poprz = (*l)->poprz;
@@ -242,6 +252,7 @@ void DodajDoPosortowanejWartownik(lista *l, int number)
         return;
     }
 
+    //zawsze znajde mniejszy element
     while((*l)->klucz < number)
     {
         l = &((*l)->nast);

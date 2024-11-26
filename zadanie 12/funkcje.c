@@ -52,93 +52,120 @@ void DodajNaKoniec(lista *l, int number)
     *l = (*l)->nast;
 }
 
-void UsunPowtorzenia(lista *l, lista *q)
+
+void UsunPowtorzenia(lista *l, lista q) 
 {
-    //jezeli ktoras z list jest pusta to nie ma co usuwac
-    if (*l == NULL || *q == NULL)
-    {
-        return;
-    }
+    //kiedy ktoras z list jest pusta to nie ma co usuwac
+    if (*l == NULL || q == NULL) return;
 
-    //wskaznik na element z listy q
-    lista obecnyQ = *q;
+    lista glowaL = *l; //glowa listy l
+    lista obecnyL = *l; //aktualny element listy l
+    lista poprzedniL = NULL; //poprzedni element listy l
 
+    //czy znaleziono powtorzenie
+    int found;
+
+    //while (found);
     do
     {
-        //wskaznik na poprzedni element
-        lista poprzedni = NULL;
-        //wskaznik na obecny element listy l
-        lista obecny = *l;
-        //oznaczenia pierwszego przejscia przez liste
-        int pierwszaIteracja = 1;
+        found = 0;
+        obecnyL = *l;
+        poprzedniL = NULL;
 
-        //jak jest pierwsza iteracja albo obecny element nie jest rowny pierwszemu elementowi listy
-        while (pierwszaIteracja || obecny != *l)
+
+        //while (obecnyL != glowaL);
+        //dopoki nie przejdzie calej listy l
+        do 
         {
-            //oznaczenie ze nie jest juz to pierwsza iteracja
-            pierwszaIteracja = 0;
+            //wskaznik na aktualny element listy q
+            lista obecnyQ = q;
 
-            //jak znajde element listy L to przyrownuje go z elementem z listy Q
-            if (obecny->klucz == obecnyQ->klucz)
+            //while (obecnyQ != q);
+            //dopoki nie przejdzie calej listy q
+            do
             {
-                //jak nie ma poprzedniego elementu to usuwam pierwszy element
-                if (poprzedni == NULL)
+                //jesli znajdzie powtorzenie to ustawia found na 1 i przerywa petle
+                if (obecnyL->klucz == obecnyQ->klucz)
                 {
-                    // Usuwamy pierwszy element
-                    lista usuwany = obecny;
-                    //kiedy jest tylko 1 element w liście
-                    if (obecny->nast == obecny) 
+                    found = 1;
+                    break;
+                }
+                obecnyQ = obecnyQ->nast;
+            } while (obecnyQ != q);
+            
+            //jesli znaleziono powtorzenie to usuwa element z listy l
+            if (found)
+            {
+                //zaznaczam element do usuniecia
+                lista doUsuniecia = obecnyL;
+
+                //jesli usuwam glowe listy
+                if (poprzedniL == NULL)
+                {
+                    //jesli jedyny element w liscie
+                    if (obecnyL->nast == glowaL)
                     {
+                        free(doUsuniecia);
                         *l = NULL;
-                        obecny = NULL;
-                        //lista staje sie pusta
+                        return;
                     }
-                    //kiedy jest wiecej niz 1 element
-                    else
+                    
+                    //przesuniecie glowy na drugi element
+                    *l = obecnyL->nast;
+                    glowaL = *l;
+                    obecnyL = obecnyL->nast;
+
+                    //przesuniecie ostatniego elementu na glowe
+                    lista ostatni = *l;
+                    //dopoki nie znajdzie ostatniego elementu
+                    while (ostatni->nast != doUsuniecia)
                     {
-                        //szukam ostatniego elementu
-                        lista koniec = *l;
-                        while (koniec->nast != *l)
-                        {
-                            koniec = koniec->nast;
-                        }
-                        //przypisuje nastepny element jako pierwszy
-                        koniec->nast = obecny->nast;
-                        *l = obecny->nast;
-                        obecny = *l;
+                        ostatni = ostatni->nast;
                     }
-                    //usuwam element
-                    free(usuwany);
+                    //przesuniecie ostatniego elementu na glowe
+                    ostatni->nast = glowaL;
+                    //usuniecie elementu
+                    free(doUsuniecia);
                 }
-                //kiedy jest poprzedni element
-                else
+                else //jesli usuwam inny element niz glowa
                 {
-                    //ustawiam elementy
-                    poprzedni->nast = obecny->nast;
-                    lista usuwany = obecny;
-                    obecny = obecny->nast;
-                    free(usuwany);
+                    //przesuniecie wskaznika na nastepny element
+                    poprzedniL->nast = obecnyL->nast;
+                    //jesli usuwam ostatni element
+                    if (obecnyL == glowaL)
+                    {
+                        glowaL = obecnyL->nast;
+                        *l = glowaL;
+                    }
+                    //przesuniecie wskaznika na nastepny element
+                    obecnyL = poprzedniL->nast;
+                    //usuniecie elementu
+                    free(doUsuniecia);
                 }
-
-                //znowu zaczynam od poczatku
-                //wiec dalej jest pierwsza iteracja
-                pierwszaIteracja = 1;
-            }
-            //jak element nie jest rowny to ide dalej
-            else
-            {
-                poprzedni = obecny;
-                obecny = obecny->nast;
-            }
-
-            //kiedy l juz puste to koncze
-            if (*l == NULL)
-            {
                 break;
             }
-        }
-        //po przejsciu calej listy L to ide do nastepnego elementu z listy Q
-        obecnyQ = obecnyQ->nast;
-        //dopoki nie wroce do poczatku listy Q I lista L nie jest pusta
-    } while(obecnyQ != *q && *l != NULL); 
+            else //jesli nie znaleziono powtorzenia to przesuwa wskazniki
+            {
+                poprzedniL = obecnyL;
+                obecnyL = obecnyL->nast;
+            }
+            //jesli znaleziono powtorzenie to powtarza petle
+            //dla kolejnego elementu z listy l
+        } while (obecnyL != glowaL);
+    } while (found);
+}
+
+
+
+wstystkiepowtorzenia(lista *l lista p)
+{
+    lista q = p
+    if(p)
+    {
+        do
+        {
+            usun wszystkie(l, element)
+        } while ({l!=null && p!=q});
+        
+    }
 }

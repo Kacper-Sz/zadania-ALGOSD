@@ -61,7 +61,7 @@ int main()
                 break;
             case 4:
                 //usuwanie powtorzen
-                UsunPowtorzenia(&_l, &_q);
+                UsunPowtorzenia(&_l, _q);
                 break;
             default:
                 printf("\n");
