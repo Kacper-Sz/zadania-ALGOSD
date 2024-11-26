@@ -139,5 +139,6 @@ void UsunPowtorzenia(lista *l, lista *q)
         }
         //po przejsciu calej listy L to ide do nastepnego elementu z listy Q
         obecnyQ = obecnyQ->nast;
-    } while (obecnyQ != *q && *l != NULL); // Iteruj po liście `q` do końca lub dopóki `l` nie jest pusta
+        //dopoki nie wroce do poczatku listy Q I lista L nie jest pusta
+    } while(obecnyQ != *q && *l != NULL); 
 }
