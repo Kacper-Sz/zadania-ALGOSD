@@ -35,7 +35,7 @@ void DrukujDrzewo(drzewo root)
 
 
 // 2 dodaje element do drzewa
-void DodajElement(drzewo *root, char *value)
+void DodajElement(drzewo *root, char *value, drzewo rodzic)
 {
     if (*root == NULL)
     {
@@ -43,6 +43,8 @@ void DodajElement(drzewo *root, char *value)
         // strdup alokuje pamiec na nowy string i kopiuje do niej wartosc value
         nowy->wyraz = strdup(value);
         nowy->lewy = nowy->prawy = NULL;
+        nowy->rodzic = rodzic;
+
         *root = nowy;
     }
     else
@@ -55,11 +57,11 @@ void DodajElement(drzewo *root, char *value)
 
         if (str > 0)
         {
-            DodajElement(&(*root)->prawy, value);
+            DodajElement(&(*root)->prawy, value, *root);
         }
         else if (str < 0)
         {
-            DodajElement(&(*root)->lewy, value);
+            DodajElement(&(*root)->lewy, value, *root);
         }
     }
 }
@@ -123,7 +125,7 @@ void UsunElement(drzewo *root, char *value)
 
 
 // 4 szuka elementu w drzewie
-drzewo* SzukajElementu(drzewo* root, char *value)
+drzewo* SzukajElementu(drzewo *root, char *value)
 {
     while(*root != NULL)
     {
@@ -178,3 +180,62 @@ char* Maksimum(drzewo root)
 
 
 // 7 zwraca poprzednika wskazanego elementu mozna kozystac z poprzednika
+drzewo poprzednik(drzewo root)
+{
+    if(root == NULL)
+    {
+        return NULL;
+    }
+
+    if(root->lewy != NULL)
+    {
+        drzewo obecny = root->lewy;
+
+        while(obecny->prawy != NULL)
+        {
+            obecny = obecny->prawy;
+        }
+
+        return obecny;
+    }
+
+    drzewo rodzic = root->rodzic;
+    while(rodzic != NULL && root == rodzic->lewy)
+    {
+        root = rodzic;
+        rodzic = rodzic->rodzic;
+    }
+
+    return rodzic;
+}
+
+
+// 8 zwraca nastepnika wskazanego elementu mozna kozystac z poprzednika
+drzewo nastepnik(drzewo root)
+{
+    if(root == NULL)
+    {
+        return NULL;
+    }
+
+    if(root->prawy != NULL)
+    {
+        drzewo obecny = root->prawy;
+
+        while(obecny->lewy != NULL)
+        {
+            obecny = obecny->lewy;
+        }
+
+        return obecny;
+    }
+
+    drzewo rodzic = root->rodzic;
+    while(rodzic != NULL && root == rodzic->prawy)
+    {
+        root = rodzic;
+        rodzic = rodzic->rodzic;
+    }
+
+    return rodzic;
+}

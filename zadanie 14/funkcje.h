@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-
 struct DrzewoB
 {
     char *wyraz;
@@ -13,17 +12,16 @@ typedef wDrzewoB* drzewo;
 
 // 1 wypisuje drzewo
 void Wypisz(drzewo d,int lvl);
-
 void DrukujDrzewo(drzewo root);
 
 // 2 dodaje element do drzewa
-void DodajElement(drzewo *root, char *value);
+void DodajElement(drzewo *root, char *value, drzewo rodzic);
 
 // 3 usuwa element z drzewa
 void UsunElement(drzewo *root, char *value);
 
 // 4 szuka elementu w drzewie
-drzewo* SzukajElementu(drzewo* root, char *value);
+drzewo* SzukajElementu(drzewo *root, char *value);
 
 // 5 zwraca minimum z drzewa
 char* Minimum(drzewo root);
@@ -32,6 +30,7 @@ char* Minimum(drzewo root);
 char* Maksimum(drzewo root);
 
 // 7 zwraca poprzednika wskazanego elementu mozna kozystac z poprzednika
-
+drzewo poprzednik(drzewo root);
 
 // 8 zwraca nastepnika wskazanego elementu mozna kozystac z poprzednika
+drzewo nastepnik(drzewo root);

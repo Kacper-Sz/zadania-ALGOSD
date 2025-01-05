@@ -21,6 +21,8 @@ int main()
         printf("4 - szukaj elementu\n");
         printf("5 - element minimum\n");
         printf("6 - element maksimum\n");
+        printf("7 - poprzednik\n");
+        printf("8 - nastepnik\n");
         printf("0 - wyjdz\n\n");
 
         printf("twoj wybor: ");
@@ -50,7 +52,14 @@ int main()
                 printf("podaj wyraz ktory chcesz dodac: ");
                 scanf("%s", wyraz);
                 // nazwa tablicy to adres pierwszego elementu
-                DodajElement(&root, wyraz);
+                if(root == NULL)
+                {
+                    DodajElement(&root, wyraz, NULL);
+                }
+                else
+                {
+                    DodajElement(&root, wyraz, root);
+                }
                 printf("\n");
                 break;
             }
@@ -104,8 +113,73 @@ int main()
                     printf("Drzewo jest puste\n");
                     break;
                 }
-                
                 printf("maksimum: %s\n", Maksimum(root));
+                printf("\n");
+                break;
+            }
+            case 7:
+            {
+                // zwraca poprzednika
+                printf("\n");
+                if (root == NULL)
+                {
+                    printf("Drzewo jest puste\n");
+                    break;
+                }
+
+                printf("podaj wyraz ktory chcesz znalezc: ");
+                scanf("%s", wyraz);
+                drzewo *znaleziony = SzukajElementu(&root, wyraz);
+
+                if(znaleziony != NULL)
+                {
+                    drzewo poprzedni = poprzednik(*znaleziony);
+                    if(poprzedni != NULL)
+                    {
+                        printf("poprzednik: %s\n", poprzedni->wyraz);
+                    }
+                    else
+                    {
+                        printf("nie ma poprzednika\n");
+                    }
+                }
+                else
+                {
+                    printf("nie znaleziono takeigo elemntu\n");
+                }
+                printf("\n");
+                break;
+            }
+            case 8:
+            {
+                // zwraca nastepnika
+                printf("\n");
+                if (root == NULL)
+                {
+                    printf("Drzewo jest puste\n");
+                    break;
+                }
+
+                printf("podaj wyraz ktory chcesz znalezc: ");
+                scanf("%s", wyraz);
+                drzewo *znaleziony = SzukajElementu(&root, wyraz);
+
+                if(znaleziony != NULL)
+                {
+                    drzewo nastepny = nastepnik(*znaleziony);
+                    if(nastepny != NULL)
+                    {
+                        printf("nastepnik: %s\n", nastepny->wyraz);
+                    }
+                    else
+                    {
+                        printf("nie ma nastepnika\n");
+                    }
+                }
+                else
+                {
+                    printf("nie znaleziono takeigo elemntu\n");
+                }
                 printf("\n");
                 break;
             }
