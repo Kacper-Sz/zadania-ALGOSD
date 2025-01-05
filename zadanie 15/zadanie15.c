@@ -23,7 +23,7 @@ int main()
         printf("6 - element maksimum\n");
         printf("7 - poprzednik\n");
         printf("8 - nastepnik\n");
-        printf("9 - zapis do pliku\n\n");
+        printf("9 - zapis do pliku\n");
         printf("10 - odczyt z pliku (kasuje obecne drzewo)\n\n");
         printf("0 - wyjdz\n\n");
 
