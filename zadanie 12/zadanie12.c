@@ -66,6 +66,7 @@ int main()
             default:
                 printf("\n");
                 printf("wybierz poprawne odpowiednia liczbe\n");
+                break;
         }
     }
 

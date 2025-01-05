@@ -85,3 +85,31 @@ void polaczListy(lista *l, lista *q)
     }
     
 }
+
+
+//tutaj rozwiazanie inne 
+/*
+Oleksandr Sokolov
+lista polacz(lista q, lista p)
+{
+    if (q == NULL)
+        return p;
+    else if (p == NULL)
+        return q;
+
+    lista nowa = NULL;
+    if (q->klucz <= p->klucz)
+    {
+        nowa = q;
+        nowa->nast = polacz(q->nast, p);
+    }
+    else
+    {
+        nowa = p;
+        nowa->nast = polacz(q, p->nast);
+    }
+    return nowa;
+}
+
+10.12.2024, 3:09:28 PM
+*/
