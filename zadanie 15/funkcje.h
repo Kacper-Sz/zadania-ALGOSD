@@ -34,3 +34,10 @@ drzewo Poprzednik(drzewo root);
 
 // 8 zwraca nastepnika wskazanego elementu mozna kozystac z poprzednika
 drzewo Nastepnik(drzewo root);
+
+// 9 zapisuje drzewo do pliku
+void ZapiszDoPlikuRekurencyjnie(FILE *plik, drzewo root);
+int ZapiszDoPliku(drzewo root);
+
+// 10 odczytuje drzewo z pliku
+drzewo OdczytajZPliku();

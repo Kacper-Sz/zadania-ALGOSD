@@ -239,3 +239,63 @@ drzewo Nastepnik(drzewo root)
 
     return rodzic;
 }
+
+
+// 9 zapisuje drzewo do pliku
+void ZapiszDoPlikuRekurencyjnie(FILE *plik, drzewo root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+
+    fprintf(plik, "%s\n", root->wyraz);
+    ZapiszDoPlikuRekurencyjnie(plik, root->lewy);
+    ZapiszDoPlikuRekurencyjnie(plik, root->prawy);
+}
+
+int ZapiszDoPliku(drzewo root)
+{
+    FILE *plik = fopen("drzewo.txt", "w");
+    if (plik == NULL)
+    {
+        return 123;
+    }
+
+    ZapiszDoPlikuRekurencyjnie(plik, root);
+
+    fclose(plik);
+    return 0;
+}
+
+
+// 10 odczytuje drzewo z pliku
+drzewo OdczytajZPliku()
+{
+    FILE *plik = fopen("drzewo.txt", "r");
+
+    if(plik == NULL)
+    {
+        return NULL;
+    }
+
+    drzewo root = NULL;
+    char odczytany[50];
+
+    while(fscanf(plik, "%s", odczytany) != EOF)
+    {
+        if(root == NULL)
+        {
+            DodajElement(&root, odczytany, NULL);
+        }
+        else
+        {
+            DodajElement(&root, odczytany, root);
+        }
+    }
+
+    fclose(plik);
+    return root;
+}
+
+

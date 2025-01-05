@@ -23,6 +23,8 @@ int main()
         printf("6 - element maksimum\n");
         printf("7 - poprzednik\n");
         printf("8 - nastepnik\n");
+        printf("9 - zapis do pliku\n\n");
+        printf("10 - odczyt z pliku (kasuje obecne drzewo)\n\n");
         printf("0 - wyjdz\n\n");
 
         printf("twoj wybor: ");
@@ -180,6 +182,31 @@ int main()
                 {
                     printf("nie znaleziono takeigo elemntu\n");
                 }
+                printf("\n");
+                break;
+            }
+            case 9:
+            {
+                // zapisuje drzewo do pliku
+                printf("\n");
+                int zapis = ZapiszDoPliku(root);
+                if(zapis == 0)
+                {
+                    printf("zapisano do pliku\n");
+                }
+                else
+                {
+                    printf("blad zapisu\n");
+                }
+                printf("\n");
+                break;
+            }
+            case 10:
+            {
+                // odczytuje drzewo z pliku
+                printf("\n");
+                root = OdczytajZPliku();
+                printf("odczytano z pliku\n");
                 printf("\n");
                 break;
             }
