@@ -251,31 +251,38 @@ drzewo Nastepnik(drzewo root)
     return rodzic;
 }
 
+// tu zaczynaja sie nowe funkcje reszta przekopiowana z poprzedniego zadania
 
 // 9 zapisuje drzewo do pliku
 void ZapiszDoPlikuRekurencyjnie(FILE *plik, drzewo root)
 {
+    // jak drzewo jest puste to nic nie zapisuje
     if (root == NULL)
     {
         return;
     }
-
+    // do pliku tekstowego zapusuje wyraz
     fprintf(plik, "%s\n", root->wyraz);
+    // najpierw rektuenrycznie zapisuje wszystkie elementy z lewej strony
     ZapiszDoPlikuRekurencyjnie(plik, root->lewy);
+    // potem zapisuje wszystkie elementy z prawej strony
     ZapiszDoPlikuRekurencyjnie(plik, root->prawy);
 }
 
 int ZapiszDoPliku(drzewo root)
 {
+    // otwieranie pliku do zapisu
     FILE *plik = fopen("drzewo.txt", "w");
     if (plik == NULL)
     {
+        // jak nie udalo sie otworzyc pliku to zwraca 123
         return 123;
     }
-
+    // zapisywanie drzewa
     ZapiszDoPlikuRekurencyjnie(plik, root);
-
+    // zamykanie pliku
     fclose(plik);
+    // jak wszystko ok to zwraca 0
     return 0;
 }
 
@@ -283,29 +290,39 @@ int ZapiszDoPliku(drzewo root)
 // 10 odczytuje drzewo z pliku
 drzewo OdczytajZPliku()
 {
+    // otwieram plik do odczytu
     FILE *plik = fopen("drzewo.txt", "r");
 
+    // jak nie udalo sie otworzyc pliku to zwraca NULL
     if(plik == NULL)
     {
         return NULL;
     }
 
+    // tworze drzewo do ktorego bede zapisywal elementy
     drzewo root = NULL;
+    // tworze tablice do ktorej bede zapisywal odczytane elementy
     char odczytany[50];
 
+    // odczytuje elementy z pliku dopoki nie dojde do konca pliku
+    // i zapisuje je do chhar odczytany
     while(fscanf(plik, "%s", odczytany) != EOF)
     {
+        // jak drzewo jest puste to dodaje pierwszy element
         if(root == NULL)
         {
             DodajElement(&root, odczytany, NULL);
         }
         else
         {
+            // jak dodaje kolejne elementy
             DodajElement(&root, odczytany, root);
         }
     }
 
+    // zamykam plik
     fclose(plik);
+    // zwracam nowe drzewo
     return root;
 }
 
