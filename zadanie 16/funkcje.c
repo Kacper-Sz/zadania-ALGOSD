@@ -102,31 +102,39 @@ drzewo Nastepnik(drzewo root)
     return rodzic;
 }
 
+// funkcje wyzej sa z poprzedniego zadania
+
 // sprawdza czy dwa drzewa sa takie same
 int CzyTakieSame(drzewo root1, drzewo root2)
 {
-    //  zwracam 1 jak drzewa sa takie same
+    //  zwracam 1 jak drzewa maja takie same elementy
     // zwracam 0 jak drzewa sa rozne
 
+    // jak oba drzewa sa puste to sa takie same
     if(root1 == NULL && root2 == NULL)
     {
         return 1;
     }
 
+    // jak jedno drzewo jest puste a drugie nie to sa rozne
     if (root1 == NULL || root2 == NULL)
     {
         return 0;
     }
 
+    // szukam najmniejszego elementu w obu drzewach
     drzewo najmniejszy1 = Minimum(root1);
     drzewo najmniejszy2 = Minimum(root2);
 
+    // dopoki istnieje najmniejszy element w obu drzewach
     while(najmniejszy1 != NULL && najmniejszy2 != NULL)
     {
+        // to sprawdzam czy sa takie same
         if(najmniejszy1->klucz != najmniejszy2->klucz)
         {
             return 0;
         }
+        // przesuwam sie do nastepnego elementu
         najmniejszy1 = Nastepnik(najmniejszy1);
         najmniejszy2 = Nastepnik(najmniejszy2);
     }
