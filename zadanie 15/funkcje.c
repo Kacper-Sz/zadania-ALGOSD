@@ -97,6 +97,11 @@ void UsunElement(drzewo *root, char *value)
             *element = (*element)->lewy;
         }
 
+        if (*element != NULL)
+        {
+            (*element)->rodzic = temp->rodzic;
+        }
+
         free(temp->wyraz);
         free(temp);
     }
@@ -116,6 +121,12 @@ void UsunElement(drzewo *root, char *value)
         // Usunięcie następnika
         drzewo temp = *nastepnik;
         *nastepnik = (*nastepnik)->prawy;
+
+        if (*nastepnik != NULL)
+        {
+            (*nastepnik)->rodzic = temp->rodzic;
+        }
+
         free(temp->wyraz);
         free(temp);
     }

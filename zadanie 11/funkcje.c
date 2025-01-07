@@ -77,23 +77,27 @@ void UsunPierwszyB(listaB *l)
 
 void UsuwanKaty(listaB *l, int k)
 {
-
+    // jak jest null to lista pusta
     if(l == NULL)
     {
         printf("lista jest pusta\n");
         return;
     }
 
+    // tworze nowy wskaznik na liste
     listaB q = *l;
 
+    // dopoki nie zostanie jeden element to usuwam co k-ty element
     while(q->nast != q)
     {
+        // przesuwam sie o k elementow
         for(int i = 1; i < k; i++)
         {
             q = q->nast;
         }
-
+        // usuwam element
         UsunPierwszyB(&q);
+        // przesuwam sie na nastepny element
         *l = q;
     }
 }
