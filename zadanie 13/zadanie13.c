@@ -61,7 +61,7 @@ int main()
                 printf("\n");
                 break;
             case 4:
-                printd("\n");
+                printf("\n");
                 printf("podaj liczbe ktorej priorytet chcesz zmienic: ");
                 scanf("%d", &liczba);
                 printf("podaj nowy priorytet: ");
