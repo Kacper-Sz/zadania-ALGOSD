@@ -33,3 +33,4 @@ void DodajDoKolejkiPriorytetowej(lista *l, int wartosc, int nowy_priorytet)
         *l = nowy;
     }
 }
+
