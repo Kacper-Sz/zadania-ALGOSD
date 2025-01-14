@@ -16,6 +16,8 @@ int main()
         printf("nastepna operacja: \n");
         printf("1 - wyswietl liste\n");
         printf("2 - dodaj element\n");
+        printf("3 - pobierz element\n");
+        printf("4 - zmien priorytet\n");
         
         printf("0 - wyjdz\n\n");
 
@@ -56,6 +58,15 @@ int main()
                 {
                     printf("lista jest pusta\n");
                 }
+                printf("\n");
+                break;
+            case 4:
+                printd("\n");
+                printf("podaj liczbe ktorej priorytet chcesz zmienic: ");
+                scanf("%d", &liczba);
+                printf("podaj nowy priorytet: ");
+                scanf("%d", &priorytet);
+                ZmienPriorytet(&_l, liczba, priorytet);
                 printf("\n");
                 break;
             default:

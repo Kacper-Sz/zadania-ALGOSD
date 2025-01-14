@@ -18,3 +18,5 @@ lista PobierzElement(lista *l);
 
 void ZmienPriorytet(lista *l, int wartosc, int nowy_priorytet);
 
+void UsunElement(lista *l, int wartosc, int priorytet_szukany);
+

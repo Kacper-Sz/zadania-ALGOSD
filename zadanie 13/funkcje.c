@@ -61,5 +61,43 @@ lista PobierzElement(lista *l)
 
 void ZmienPriorytet(lista *l, int wartosc, int nowy_priorytet)
 {
-    
+    if(*l == NULL)
+    {
+        printf("kolejka jest pusta\n");
+        return;
+    }
+
+    while((*l) != NULL && (*l)->klucz != wartosc)
+    {
+        l = &(*l)->nast;
+    }
+
+    if(*l == NULL)
+    {
+        printf("nie znaleziono elementu o podanym kluczu\n");
+        return;
+    }
+
+    int stary_priorytet = (*l)->priorytet;
+
+    UsunElement(l, wartosc, stary_priorytet);
+
+    DodajDoKolejkiPriorytetowej(l, wartosc, nowy_priorytet);
+
+    printf("zmieniono priorytet elementu o kluczu %d z priorytetu %d na %d\n", wartosc, stary_priorytet, nowy_priorytet);
+
+}
+
+void UsunElement(lista *l, int wartosc, int priorytet_szukany)
+{
+    if(*l == NULL) return;
+
+    while((*l) != NULL && (*l)->klucz != wartosc && (*l)->priorytet != priorytet_szukany)
+    {
+        l = &(*l)->nast;
+    }
+
+    lista tmp = *l;
+    *l = (*l)->nast;
+    free(tmp);
 }
