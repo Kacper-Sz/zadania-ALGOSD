@@ -4,6 +4,12 @@
 
 void WyswietlKolejke(lista l)
 {
+    if(l == NULL)
+    {
+        printf("kolejka jest pusta\n");
+        return;
+    }
+
     while(l)
     {
         printf("[ klucz: %d, priorytet: %d ]\t", l->klucz, l->priorytet);
@@ -34,3 +40,26 @@ void DodajDoKolejkiPriorytetowej(lista *l, int wartosc, int nowy_priorytet)
     }
 }
 
+lista PobierzElement(lista *l)
+{
+    if(*l == NULL)
+    {
+        return NULL;
+    }
+
+    while ((*l)->nast != NULL)
+    {
+        l = &(*l)->nast;
+    }
+    // *l to ostatni element
+
+    lista pobrany = *l;
+    free(*l);
+    *l = NULL;
+    return pobrany;
+}
+
+void ZmienPriorytet(lista *l, int wartosc, int nowy_priorytet)
+{
+    
+}

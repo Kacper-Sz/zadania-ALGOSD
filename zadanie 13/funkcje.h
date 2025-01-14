@@ -14,7 +14,7 @@ void WyswietlKolejke(lista l);
 
 void DodajDoKolejkiPriorytetowej(lista *l, int wartosc, int nowy_priorytet);
 
-void PobierzElement(lista *l);
+lista PobierzElement(lista *l);
 
 void ZmienPriorytet(lista *l, int wartosc, int nowy_priorytet);
 

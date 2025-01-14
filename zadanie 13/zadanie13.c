@@ -45,6 +45,19 @@ int main()
                 DodajDoKolejkiPriorytetowej(&_l, liczba, priorytet);
                 printf("\n");
                 break;
+            case 3:
+                printf("\n");
+                lista pobrany = PobierzElement(&_l);
+                if(pobrany != NULL)
+                {
+                    printf("pobrany element: [ klucz: %d, priorytet: %d ]\n", pobrany->klucz, pobrany->priorytet);
+                }
+                else
+                {
+                    printf("lista jest pusta\n");
+                }
+                printf("\n");
+                break;
             default:
                 printf("\n");
                 printf("wybierz poprawne odpowiednia liczbe\n");
