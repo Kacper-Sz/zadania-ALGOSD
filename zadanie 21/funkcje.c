@@ -101,3 +101,18 @@ void sortowanie_szybkie(int tab [], int rozmiar, sortowanie *wynik, int lewy, in
         }
     }
 }
+
+void sortowanie_shella(int tab [], int rozmiar, sortowanie *wyniki)
+{
+    int i, j, temp;
+    int polowa;
+
+    for(polowa = rozmiar / 2; polowa>0; polowa /= 2)
+    {
+        for(i=polowa; i<size; i++)
+        {
+            temp = tab[i];
+            int j;
+        }
+    }
+}
