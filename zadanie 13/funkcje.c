@@ -24,9 +24,12 @@ void DodajDoKolejkiPriorytetowej(lista *l, int wartosc, int nowy_priorytet)
     }
     else
     {
-        while((*l)->nast && (*l)->nast->priorytet < nowy_priorytet)
+        while((*l) != NULL && (*l)->priorytet < nowy_priorytet)
         {
             l = &(*l)->nast;
         }
+
+        nowy->nast = *l;
+        *l = nowy;
     }
 }
