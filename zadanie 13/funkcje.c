@@ -12,6 +12,7 @@ void WyswietlKolejke(lista l)
 
     while(l)
     {
+        // dopoki nie jest null to wypisuje element z priorytetem
         printf("[ klucz: %d, priorytet: %d ]\t", l->klucz, l->priorytet);
         l = l->nast;
     }
@@ -19,10 +20,12 @@ void WyswietlKolejke(lista l)
 
 void DodajDoKolejkiPriorytetowej(lista *l, int wartosc, int nowy_priorytet)
 {
+    // tworze nowy element listy
     lista nowy = malloc(sizeof(elListy));
     nowy->klucz = wartosc;
     nowy->priorytet = nowy_priorytet;
 
+    // jesli lista jest pusta to dodaje element na poczatek
     if(*l == NULL)
     {
         nowy->nast = NULL;
@@ -30,7 +33,8 @@ void DodajDoKolejkiPriorytetowej(lista *l, int wartosc, int nowy_priorytet)
     }
     else
     {
-        while((*l) != NULL && (*l)->priorytet < nowy_priorytet)
+        // jesli nie to szukam odpowiedniego miejsca dla elementu
+        while((*l) != NULL && (*l)->priorytet >= nowy_priorytet)
         {
             l = &(*l)->nast;
         }
@@ -42,20 +46,17 @@ void DodajDoKolejkiPriorytetowej(lista *l, int wartosc, int nowy_priorytet)
 
 lista PobierzElement(lista *l)
 {
+    // jak lista jest pusta to zwracam null
     if(*l == NULL)
     {
         return NULL;
     }
-
-    while ((*l)->nast != NULL)
-    {
-        l = &(*l)->nast;
-    }
-    // *l to ostatni element
-
+    // pobieram pierwszy element z listy
     lista pobrany = *l;
-    free(*l);
-    *l = NULL;
+    *l = (*l)->nast;
+    pobrany->nast = NULL;
+    // i zwracam go
+    //zwalnianie pamieci w mainie
     return pobrany;
 }
 
@@ -67,6 +68,9 @@ void ZmienPriorytet(lista *l, int wartosc, int nowy_priorytet)
         return;
     }
 
+    // tmp to wskaznik na poczatek listy
+    lista *tmp = l;
+    // szukam elementu o podanym kluczu
     while((*l) != NULL && (*l)->klucz != wartosc)
     {
         l = &(*l)->nast;
@@ -80,9 +84,9 @@ void ZmienPriorytet(lista *l, int wartosc, int nowy_priorytet)
 
     int stary_priorytet = (*l)->priorytet;
 
-    UsunElement(l, wartosc, stary_priorytet);
+    UsunElement(tmp, wartosc, stary_priorytet);
 
-    DodajDoKolejkiPriorytetowej(l, wartosc, nowy_priorytet);
+    DodajDoKolejkiPriorytetowej(tmp, wartosc, nowy_priorytet);
 
     printf("zmieniono priorytet elementu o kluczu %d z priorytetu %d na %d\n", wartosc, stary_priorytet, nowy_priorytet);
 
@@ -92,12 +96,19 @@ void UsunElement(lista *l, int wartosc, int priorytet_szukany)
 {
     if(*l == NULL) return;
 
-    while((*l) != NULL && (*l)->klucz != wartosc && (*l)->priorytet != priorytet_szukany)
+    // szukam elementu o podanym kluczu i priorytecie
+    while((*l) != NULL)
     {
-        l = &(*l)->nast;
+        if((*l)->klucz != wartosc && (*l)->priorytet != priorytet_szukany)
+        {
+            l = &(*l)->nast;
+        }
+        else
+        {
+            // jesli znalazlem to usuwam go
+            lista tmp = *l;
+            *l = (*l)->nast;
+            free(tmp);
+        }
     }
-
-    lista tmp = *l;
-    *l = (*l)->nast;
-    free(tmp);
 }

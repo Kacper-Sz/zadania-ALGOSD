@@ -53,10 +53,11 @@ int main()
                 if(pobrany != NULL)
                 {
                     printf("pobrany element: [ klucz: %d, priorytet: %d ]\n", pobrany->klucz, pobrany->priorytet);
+                    free(pobrany);
                 }
                 else
                 {
-                    printf("lista jest pusta\n");
+                    printf("kolejka jest pusta\n");
                 }
                 printf("\n");
                 break;
