@@ -3,7 +3,7 @@
 
 #include "funkcje.h"
 
-void sortowanie_babelkowe(int tab[], int rozmiar, sortowanie *wyniki)
+void sortowanie_babelkowe(int tab[], int rozmiar, sortowanie *wynik)
 {
     int i, j, temp;
     for(i=0; i<rozmiar-1; i++)
@@ -15,14 +15,37 @@ void sortowanie_babelkowe(int tab[], int rozmiar, sortowanie *wyniki)
                 temp=tab[j];
                 tab[j]=tab[j+1];
                 tab[j+1]=temp;
+                wynik->przestawienia+=3;
                 //wyniki->przestawienia+=2;
                 //wyniki->przestawienia+=1;
             }
-            wyniki->porownania+=1;
-
-            /*
-            mam pytanie cos takiego powinienem liczyc jako jedno przestawienie czy jako 2 bo jakby teoretycznie sa 2 przestawienia bo z j+1 na j i z j na j+1 ale znowu mozna to tez w sumie policzyc jako 1 jako operacje ze zamieniaja sie miejscami
-            */
+            wynik->porownania+=1;
         }
+    }
+}
+
+void sortowanie_wstawianie(int tab[], int rozmiar, sortowanie *wynik)
+{
+    int i, j, temp;
+    
+    for(i=1; i<rozmiar; i++)
+    {
+        wynik->przestawienia+=1;
+        wynik->porownania+=1;
+
+        temp=tab[i];
+        j=i-1;
+
+        while(j>=0 && tab[j]>temp)
+        {
+            wynik->przestawienia+=1;
+            wynik->porownania+=1;
+            
+            tab[j+1]=tab[j];
+            j--;
+        }
+
+        tab[j+1]=temp;
+        wynik->przestawienia+=1;        
     }
 }
