@@ -109,7 +109,7 @@ void sortowanie_shella(int tab [], int rozmiar, sortowanie *wyniki)
 
     for(polowa = rozmiar / 2; polowa>0; polowa /= 2)
     {
-        for(i=polowa; i<size; i++)
+        for(i=polowa; i<rozmiar; i++)
         {
             temp = tab[i];
             int j;
