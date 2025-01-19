@@ -3,6 +3,41 @@
 
 #include "funkcje.h"
 
+
+void sortowanie_rosnaco(int tab[], int rozmiar)
+{
+    for(int i = 0; i < rozmiar - 1; i++)
+    {
+        for(int j = 0; j < rozmiar - i - 1; j++)
+        {
+            if(tab[j] > tab[j + 1])
+            {
+                int temp = tab[j];
+                tab[j] = tab[j + 1];
+                tab[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void sortowanie_malejaco(int tab[], int rozmiar)
+{
+    for(int i = 0; i < rozmiar - 1; i++)
+    {
+        for(int j = 0; j < rozmiar - i - 1; j++)
+        {
+            if(tab[j] < tab[j + 1])
+            {
+                int temp = tab[j];
+                tab[j] = tab[j + 1];
+                tab[j + 1] = temp;
+            }
+        }
+    }
+}
+
+
+
 void sortowanie_babelkowe(int tab[], int rozmiar, sortowanie *wynik)
 {
     int i, j, temp;
@@ -16,8 +51,6 @@ void sortowanie_babelkowe(int tab[], int rozmiar, sortowanie *wynik)
                 tab[j]=tab[j+1];
                 tab[j+1]=temp;
                 wynik->przestawienia+=3;
-                //wyniki->przestawienia+=2;
-                //wyniki->przestawienia+=1;
             }
             wynik->porownania+=1;
         }
@@ -112,7 +145,24 @@ void sortowanie_shella(int tab [], int rozmiar, sortowanie *wyniki)
         for(i=polowa; i<rozmiar; i++)
         {
             temp = tab[i];
-            int j;
+            for(j=i; j>polowa; j-=polowa)
+            {
+                if(temp < tab[j-polowa])
+                {
+                    wyniki->porownania+=1;
+                    tab[j] = tab[j-polowa];
+                    wyniki->przestawienia+=1;
+                }
+                else
+                {
+                    wyniki->porownania+=1;
+                    break;
+                }
+                tab[j] = temp;
+                wyniki->przestawienia+=1;
+            }
         }
     }
 }
+
+
