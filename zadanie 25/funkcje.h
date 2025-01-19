@@ -1,12 +1,20 @@
 #include <stdio.h>
 
-typedef struct Node
+struct el
 {
-    int vertex;
+    int key;
     int weight;
-    struct Node *next;
-} Node;
+    struct el* next;
+};
 
-Node* StworzNode(int wierzcholek, int waga);
+typedef struct el elList;
+typedef elList* lista;
 
-void DodajKrawedz(Node *lista, int wierzcholek, int waga);
+
+lista StworzNode(int wierzcholek, int waga);
+
+void DodajKrawedz(lista* graph, int src, int dest, int weight);
+
+int MinDystans(int* dist, int* visited, int V);
+
+void Dijkstra(lista* graph, int V, int start);
