@@ -31,16 +31,19 @@ int main()
     sortowanie wynik_wstawianie_nieposortowana = {0, 0};
     sortowanie wynik_szybkie_nieposortowana = {0, 0};
     sortowanie wynik_shella_nieposortowana = {0, 0};
+    sortowanie wynik_zliczanie_nieposortowana = {0, 0};
 
     sortowanie wynik_babelkowe_rosnaco = {0, 0};
     sortowanie wynik_wstawianie_rosnaco = {0, 0};
     sortowanie wynik_szybkie_rosnaco = {0, 0};
     sortowanie wynik_shella_rosnaco = {0, 0};
+    sortowanie wyniki_zliczanie_rosnaco = {0, 0};
 
     sortowanie wynik_babelkowe_malejaco = {0, 0};
     sortowanie wynik_wstawianie_malejaco = {0, 0};
     sortowanie wynik_szybkie_malejaco = {0, 0};
     sortowanie wynik_shella_malejaco = {0, 0};
+    sortowanie wyniki_zliczanie_malejaco = {0, 0};
 
 
     // sortowanie nieposortowanej
@@ -56,6 +59,9 @@ int main()
     memcpy(tab_kopia, tab_nieposortowana, sizeof(tab_nieposortowana));
     sortowanie_shella(tab_kopia, M, &wynik_shella_nieposortowana);
 
+    memcpy(tab_kopia, tab_nieposortowana, sizeof(tab_nieposortowana));
+    SortowanieZliczanie(tab_kopia, M, &wynik_zliczanie_nieposortowana);
+
     // sortowanie rosnaco
     memcpy(tab_kopia, tab_rosnaco, sizeof(tab_rosnaco));
     sortowanie_babelkowe(tab_kopia, M, &wynik_babelkowe_rosnaco);
@@ -69,6 +75,9 @@ int main()
     memcpy(tab_kopia, tab_rosnaco, sizeof(tab_rosnaco));
     sortowanie_shella(tab_kopia, M, &wynik_shella_rosnaco);
 
+    memcpy(tab_kopia, tab_rosnaco, sizeof(tab_rosnaco));
+    SortowanieZliczanie(tab_kopia, M, &wyniki_zliczanie_rosnaco);
+
     // sortowanie malejaco
     memcpy(tab_kopia, tab_malejaco, sizeof(tab_malejaco));
     sortowanie_babelkowe(tab_kopia, M, &wynik_babelkowe_malejaco);
@@ -81,6 +90,9 @@ int main()
 
     memcpy(tab_kopia, tab_malejaco, sizeof(tab_malejaco));
     sortowanie_shella(tab_kopia, M, &wynik_shella_malejaco);
+
+    memcpy(tab_kopia, tab_malejaco, sizeof(tab_malejaco));
+    SortowanieZliczanie(tab_kopia, M, &wyniki_zliczanie_malejaco);
 
     printf("SORTOWANIE NIEPOSORTOWANEJ\n");
     printf("Sortowanie babelkowe (nieposortowana): przestawienia = %d, porownania = %d\n", wynik_babelkowe_nieposortowana.przestawienia, wynik_babelkowe_nieposortowana.porownania);
@@ -101,5 +113,15 @@ int main()
     printf("Sortowanie przez wstawianie (malejaco): przestawienia = %d, porownania = %d\n", wynik_wstawianie_malejaco.przestawienia, wynik_wstawianie_malejaco.porownania);
     printf("Sortowanie szybkie (malejaco): przestawienia = %d, porownania = %d\n", wynik_szybkie_malejaco.przestawienia, wynik_szybkie_malejaco.porownania);
     printf("Sortowanie Shella (malejaco): przestawienia = %d, porownania = %d\n", wynik_shella_malejaco.przestawienia, wynik_shella_malejaco.porownania);
+    
+    
+    
+    printf("\n");
+    printf("zad 23 - SORTOWANIE ZLICZANIE\n");
+    printf("Sortowanie zliczanie (nieposortowana): przestawienia = %d, porownania = %d\n", wynik_zliczanie_nieposortowana.przestawienia, wynik_zliczanie_nieposortowana.porownania);
+    printf("Sortowanie zliczanie (rosnaco): przestawienia = %d, porownania = %d\n", wyniki_zliczanie_rosnaco.przestawienia, wyniki_zliczanie_rosnaco.porownania);
+    printf("Sortowanie zliczanie (malejaco): przestawienia = %d, porownania = %d\n", wyniki_zliczanie_malejaco.przestawienia, wyniki_zliczanie_malejaco.porownania);
+    printf("\n");
+
     return 0;
 }

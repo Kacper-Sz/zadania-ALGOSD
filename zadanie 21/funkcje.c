@@ -88,12 +88,45 @@ void sortowanie_wstawianie(int tab[], int rozmiar, sortowanie *wynik)
 // kazda z nich
 void sortowanie_szybkie(int tab [], int rozmiar, sortowanie *wynik, int lewy, int prawy)
 {
-    int i, j, srodek, temp;
+    int pi;
 
-    
+    if(lewy<prawy)
+    {
+        pi = partition(tab, lewy, prawy, wynik);
+        sortowanie_szybkie(tab, rozmiar, wynik, lewy, pi-1);
+        sortowanie_szybkie(tab, rozmiar, wynik, pi+1, prawy);
+    }
 }
 
-// 
+int partition(int tab[], int lewy, int prawy, sortowanie *wynik)
+{
+    int pivot = tab[prawy];
+    int i = lewy - 1;
+    int temp;
+    int j;
+
+    for(j=lewy; j<=prawy-1; j++)
+    {
+        if(tab[j] < pivot)
+        {
+            i++;
+            temp = tab[i];
+            tab[i] = tab[j];
+            tab[j] = temp;
+            wynik->przestawienia+=3;
+        }
+        wynik->porownania+=1;
+    }
+
+    temp = tab[i+1];
+    tab[i+1] = tab[prawy];
+    tab[prawy] = temp;
+    wynik->przestawienia+=3;
+
+    return i+1;
+}
+
+// polega na porownywaniu elementow oddalonych od siebie
 void sortowanie_shella(int tab [], int rozmiar, sortowanie *wyniki)
 {
     int i, j, temp;
@@ -126,3 +159,77 @@ void sortowanie_shella(int tab [], int rozmiar, sortowanie *wyniki)
 }
 
 
+
+
+
+
+// wybieramy najwieksza wartosc z tablicy
+int maximum(int tab[], int k, sortowanie *wyniki)
+{
+    int max = tab[0];
+    wyniki->przestawienia+=1;
+    for (int i = 1; i < k; i++)
+    {
+        if (tab[i] > max)
+        {
+            max = tab[i];
+            wyniki->przestawienia+=1;
+        }
+        wyniki->porownania+=1;
+    }
+    return max;
+}
+
+// sortowanie przez zliczanie
+void SortowanieZliczanie(int tab[], int k, sortowanie *wyniki)
+{
+    int i;
+
+    // szukamy najwiekszej wartosci w tablicy
+    int max = maximum(tab, k, wyniki);
+
+    // tworzymy tablice zlicz do zliczania ilosci wystapien kazdej wartosci
+    int* zlicz = malloc((max + 1) * sizeof(int));
+    // tworzymy tablice wynik do przechowywania posortowanych wartosci
+    int* wynik = malloc((k+1) * sizeof(int));
+
+    // wypelniamy tablice zlicz zerami
+    for (i = 0; i <= max; i++)
+    {
+        zlicz[i] = 0;
+        wyniki->przestawienia+=1;
+    }
+
+    // zliczamy ilosc wystapien kazdej wartosci
+    // indeks tablicy zlicz odpowiada wartosci w tablicy tab
+    for(i=0; i<k; i++)
+    {
+        zlicz[tab[i]]++;
+        wyniki->przestawienia+=1;
+    }
+
+    // sumujemy ilosc wystapien kazdej wartosci
+    for(i=1; i<=max; i++)
+    {
+        zlicz[i] += zlicz[i-1];
+        wyniki->przestawienia+=1;
+    }
+
+    // buduje tablice wynik
+    for(i=k-1; i>=0; i--)
+    {
+        wynik[zlicz[tab[i]]-1] = tab[i];
+        zlicz[tab[i]]--;
+        wyniki->przestawienia+=2;
+    }
+
+    // przepisuje posortowane wartosci do tablicy tab
+    for(i=0; i<k; i++)
+    {
+        tab[i] = wynik[i];
+        wyniki->przestawienia+=1;
+    }
+
+    free(zlicz);
+    free(wynik);
+}
