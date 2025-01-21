@@ -3,6 +3,7 @@
         "stdio.h": "c",
         "funkcje.h": "c",
         "stdlib.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "xutility": "c"
     }
 }
