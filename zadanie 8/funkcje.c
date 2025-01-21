@@ -113,19 +113,20 @@ void PorownajListy(lista l, lista q, lista *wynikL, lista *wynikQ)
     lista tmp = 0;
 
     // przejscie przez liste l
-
-    while(elementL != NULL && elementL->klucz != INT_MAX)
+    // jesli element z l nie znajduje sie w q to dodajemy go do wynikuL
+    while(elementL->klucz != INT_MAX)
     {
         tmp = ZnajdzPosortowanaWartownik(q, elementL->klucz);
         if(tmp == NULL)
         {
             DodajDoPosortowanejWartownik(wynikL, elementL->klucz);
         }
+        // inaczej idziemy dalej
         elementL = elementL->nast;
     }
 
     // przejscie przez liste q
-    while(elementQ != NULL && elementQ->klucz != INT_MAX)
+    while(elementQ->klucz != INT_MAX)
     {
         tmp = ZnajdzPosortowanaWartownik(l, elementQ->klucz);
         if(tmp == NULL)

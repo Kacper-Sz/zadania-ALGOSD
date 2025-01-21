@@ -7,7 +7,7 @@
 int main()
 {
     char* tab[] = {"8", "7", "1", "5", "4", "0", "2", "6", "3"};
-    char* tab_slowa[] = {"Ala", "ma", "kota", "a", "kot", "ma", "Ale"};
+    //char* tab_slowa[] = {"Ala", "ma", "kota", "a", "kot", "ma", "Ale"};
     
     int n = sizeof(tab) / sizeof(tab[0]);
 

@@ -86,7 +86,7 @@ int main()
                 //
                 PorownajListy(_l, _q, &_wynikL, &_wynikQ);
                 //
-                printf("\nLISTY PRZED\n");
+                printf("\nLISTY POROWNANE\n");
                 printf("lista L: ");
                 WyswietlListeOdPoczatku(_wynikL);
                 printf("\nlista Q: ");
