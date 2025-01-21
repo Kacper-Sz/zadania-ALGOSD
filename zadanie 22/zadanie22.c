@@ -7,7 +7,8 @@
 int main()
 {
     char* tab[] = {"8", "7", "1", "5", "4", "0", "2", "6", "3"};
-    //char* tab_slowa[] = {"Ala", "ma", "kota", "a", "kot", "ma", "Ale"};
+    //char* tab_slowa[] = {"Ala", "ma", "kota", "a", "kot", "ma", "Ale"}; 
+    //Ala i Ale predzej bo a male to 97 a A duze to 65
     
     int n = sizeof(tab) / sizeof(tab[0]);
 

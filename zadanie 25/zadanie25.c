@@ -26,9 +26,12 @@ int main()
     DodajKrawedz(graph, 2, 0, 3);
     
     DodajKrawedz(graph, 3, 0, 8);
+    DodajKrawedz(graph, 3, 1, 1);
+    DodajKrawedz(graph, 3, 5, 1);
     
     DodajKrawedz(graph, 4, 5, 4);
 
+    DodajKrawedz(graph, 5, 4, 4);
     DodajKrawedz(graph, 5, 3, 1);
     DodajKrawedz(graph, 5, 2, 6);
 

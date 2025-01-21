@@ -20,6 +20,7 @@ void DodajKrawedz(lista* graph, int src, int dest, int weight)
     graph[src] = nowy;
 }
 
+// funkcja zwracajaca wierzcholek o najmniejszym dystansie
 int MinDystans(int* dist, int* visited, int V)
 {
     int min = INT_MAX;
@@ -36,24 +37,34 @@ int MinDystans(int* dist, int* visited, int V)
     return min_index;
 }
 
+// glowna funkcja algorytmu Dijkstry
 void Dijkstra(lista* graph, int V, int start)
 {
     int* dist = malloc(V * sizeof(int));
     int* visited = malloc(V * sizeof(int));
 
+    // inicjalizacja tablicy dystansow i tablicy odwiedzonych wierzcholkow
     for (int i = 0; i < V; i++)
     {
         dist[i] = INT_MAX;
         visited[i] = 0;
     }
+    // dystans od zrodla do samego siebie wynosi 0
     dist[start] = 0;
 
+
+    // petla glowna algorytmu
     for (int count = 0; count < V - 1; count++)
     {
+        // wybieram wierzcholek o najmniejszym dystansie
         int u = MinDystans(dist, visited, V);
+        // oznaczam go jako odwiedzony
         visited[u] = 1;
 
+        // dla kazdego sasiada wierzcholka u
         lista temp = graph[u];
+        // jesli sasiad nie byl odwiedzony i dystans do niego jest mniejszy niz obecny dystans
+        // to aktualizuje dystans
         while (temp != NULL)
         {
             int v = temp->key;

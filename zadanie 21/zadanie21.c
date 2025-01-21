@@ -1,10 +1,3 @@
-// posortowac tez tablice korea bedzie posortowana 
-// posortowan malejaco
-
-
-
-//ma byc nieposortowana posortowana malejaco i malejoaco
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
