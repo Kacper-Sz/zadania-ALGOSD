@@ -3,6 +3,7 @@
 
 #include "funkcje.h"
 
+
 void heapify(char** tab, int n, int i)
 {
     // najwiekszy element
@@ -44,7 +45,7 @@ void hsort(char** tab, int n)
     // wyciagamy elementy z kopca
     for(int i = n - 1; i > 0; i--)
     {
-        // zamieniamy pierwszy element z ostatnim
+        // przenosze korzen kopca na koniec tablicy
         char* temp = tab[0];
         tab[0] = tab[i];
         tab[i] = temp;
@@ -53,6 +54,7 @@ void hsort(char** tab, int n)
     }
 }
 
+// wyswietlenie tablicy
 void wyswietl(char** tab, int n)
 {
     for(int i = 0; i < n; i++)
